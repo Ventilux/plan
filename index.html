@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ventilux Plan</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#070d1a">
+<meta name="theme-color" content="#0c1018">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -15,213 +15,207 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#070d1a;--flade:#0f1829;--flade2:#14203a;--flade3:#1a2847;--tekst:#e8eef9;--svag:#93a4c0;--svagere:#5f6f8c;
-  --linje:rgba(148,170,210,.13);--linje2:rgba(148,170,210,.22);
-  --brand:#7cc4ff;--brand2:#3d8bfd;--brandlys:rgba(61,139,253,.16);--accent:#ffb020;--accentlys:rgba(255,176,32,.12);
-  --rod:#ff6b6b;--gron:#22c55e;--glas:rgba(15,24,41,.72);
-  --skygge:0 1px 0 rgba(255,255,255,.03) inset,0 8px 24px rgba(0,0,0,.35);--skygge2:0 24px 60px rgba(0,0,0,.55);
-  --r:16px;
+  --bg:#0c1018;--flade:#121722;--flade2:#171d2a;--hover:#1c2332;--linje:#232b3a;--linje2:#2e3748;
+  --tekst:#e7eaf0;--svag:#8b95a7;--svagere:#5d6779;
+  --brand:#4f8cff;--brandsvag:rgba(79,140,255,.12);
+  --service:#d9a441;--servicesvag:rgba(217,164,65,.10);
+  --gron:#3fb27f;--rod:#e5484d;
+  --skygge:0 1px 2px rgba(0,0,0,.25);--skygge2:0 16px 48px rgba(0,0,0,.5);
+  --r:10px;color-scheme:dark;
 }
 :root[data-tema="lys"]{
-  --bg:#eef2f8;--flade:#ffffff;--flade2:#f4f7fc;--flade3:#e9eef7;--tekst:#0d1726;--svag:#56657d;--svagere:#8794a8;
-  --linje:#e1e7f0;--linje2:#cfd8e6;--brand:#0b4a7d;--brand2:#1667d0;--brandlys:#e6f0fd;--accent:#d97a00;--accentlys:#fff4e2;
-  --glas:rgba(255,255,255,.82);--skygge:0 1px 2px rgba(16,24,40,.05),0 2px 8px rgba(16,24,40,.06);--skygge2:0 20px 50px rgba(16,24,40,.2);
+  --bg:#f5f6f8;--flade:#ffffff;--flade2:#f8f9fb;--hover:#f1f3f6;--linje:#e4e7ec;--linje2:#d0d5dd;
+  --tekst:#101828;--svag:#667085;--svagere:#98a2b3;
+  --brand:#2563eb;--brandsvag:rgba(37,99,235,.08);
+  --service:#b7791f;--servicesvag:rgba(183,121,31,.08);
+  --skygge:0 1px 2px rgba(16,24,40,.06);--skygge2:0 16px 40px rgba(16,24,40,.16);color-scheme:light;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;color:var(--tekst);font:14.5px/1.45 "Plus Jakarta Sans",Inter,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
-body{background:var(--bg);min-height:100vh}
-body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background:radial-gradient(900px 500px at 8% -10%,rgba(61,139,253,.22),transparent 60%),radial-gradient(700px 420px at 100% 0%,rgba(168,85,247,.14),transparent 60%),radial-gradient(800px 500px at 60% 120%,rgba(34,197,94,.08),transparent 60%)}
-:root[data-tema="lys"] body:before{opacity:.35}
-button,input,textarea,select{font:inherit;color:inherit}
-a{color:var(--brand)}
-::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:var(--linje2);border-radius:9px;border:2px solid transparent;background-clip:padding-box}
+html,body{margin:0;background:var(--bg);color:var(--tekst);font:14px/1.45 Inter,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{min-height:100vh}
+button,input,textarea{font:inherit;color:inherit}
+a{color:var(--brand);text-decoration:none}
+svg.i{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:var(--linje2);border-radius:9px;border:2px solid var(--bg)}
 
 /* ---------- Topbjælke ---------- */
-.top{position:sticky;top:0;z-index:20;background:var(--glas);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-bottom:1px solid var(--linje)}
-.top-indre{padding:12px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.maerke{display:flex;align-items:center;gap:12px;font-weight:800;font-size:17px;letter-spacing:-.2px;margin-right:auto}
-.maerke .ikon{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#3d8bfd,#7c3aed);display:grid;place-items:center;font-size:18px;box-shadow:0 6px 18px rgba(61,139,253,.45)}
-.maerke small{display:block;font-weight:600;font-size:12px;color:var(--svag);letter-spacing:0}
-.rolle{font-size:10.5px;font-weight:800;padding:4px 9px;border-radius:999px;background:linear-gradient(135deg,#ffb020,#ff7a1a);color:#1a1000;text-transform:uppercase;letter-spacing:.8px}
-.ur{font-variant-numeric:tabular-nums;font-weight:800;font-size:13.5px;color:var(--tekst);padding:8px 12px;border:1px solid var(--linje);border-radius:11px;background:var(--flade2)}
-.tk{border:1px solid var(--linje);border-radius:11px;padding:8px 13px;font-weight:700;font-size:13.5px;cursor:pointer;background:var(--flade2);color:var(--tekst);display:inline-flex;align-items:center;gap:7px;white-space:nowrap;transition:background .15s,border-color .15s,transform .1s}
-.tk:hover{border-color:var(--linje2);background:var(--flade3)}
-.tk:active{transform:translateY(1px)}
-.tk.hvid{background:var(--brand2);border-color:var(--brand2);color:#fff}
-.tk.orange{background:linear-gradient(135deg,#ffb020,#ff7a1a);border-color:transparent;color:#1a1000;box-shadow:0 6px 18px rgba(255,140,30,.35)}
-.segment{display:inline-flex;background:var(--flade2);border:1px solid var(--linje);border-radius:12px;padding:3px}
-.segment button{border:0;background:transparent;color:var(--svag);padding:6px 14px;border-radius:9px;font-weight:700;font-size:13px;cursor:pointer}
-.segment button.on{background:var(--brand2);color:#fff;box-shadow:0 4px 12px rgba(61,139,253,.4)}
-.datonav{padding:2px 24px 14px;display:flex;align-items:center;gap:12px}
-.datonav .titel{flex:1;text-align:center}
-.datonav .titel b{display:block;font-size:24px;font-weight:800;letter-spacing:-.5px;background:linear-gradient(90deg,var(--tekst),var(--brand));-webkit-background-clip:text;background-clip:text;color:transparent}
-.datonav .titel span{font-size:12.5px;color:var(--svag);font-weight:600;letter-spacing:.3px}
-.pil{width:42px;height:42px;justify-content:center;font-size:20px;padding:0}
-
-/* ---------- Nøgletal ---------- */
-.kpi{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:16px}
-.kpi-kort{background:var(--flade);border:1px solid var(--linje);border-radius:var(--r);padding:12px 16px;box-shadow:var(--skygge);position:relative;overflow:hidden}
-.kpi-kort:after{content:"";position:absolute;right:-50px;top:-60px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,var(--glow,rgba(61,139,253,.25)),transparent 65%);pointer-events:none}
-.kpi-kort .tal{font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.1}
-.kpi-kort .lbl{font-size:12px;color:var(--svag);font-weight:600;margin-top:2px}
-.kpi-kort .ik{position:absolute;right:14px;top:12px;font-size:18px;z-index:1}
-.kpi-kort.alarm{border-color:rgba(255,176,32,.5)}
+.top{position:sticky;top:0;z-index:20;background:var(--flade);border-bottom:1px solid var(--linje)}
+.top-indre{height:56px;padding:0 24px;display:flex;align-items:center;gap:8px}
+.maerke{display:flex;align-items:center;gap:10px;margin-right:auto;min-width:0}
+.logo{width:30px;height:30px;border-radius:8px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px;flex:none}
+.maerke b{font-weight:600;font-size:15px;white-space:nowrap}
+.maerke small{color:var(--svag);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.maerke .skil{color:var(--svagere)}
+.rolle{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;border:1px solid var(--linje2);color:var(--svag)}
+.tk{height:34px;border:1px solid var(--linje);border-radius:8px;padding:0 12px;font-weight:500;font-size:13px;cursor:pointer;background:var(--flade);color:var(--tekst);display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.tk:hover{background:var(--hover)}
+.tk.ikon{width:34px;padding:0;justify-content:center}
+.tk.primaer{background:var(--brand);border-color:var(--brand);color:#fff}
+.tk.primaer:hover{filter:brightness(1.08)}
+.segment{display:inline-flex;border:1px solid var(--linje);border-radius:8px;padding:2px;background:var(--flade2)}
+.segment button{height:28px;border:0;background:transparent;color:var(--svag);padding:0 12px;border-radius:6px;font-weight:500;font-size:13px;cursor:pointer}
+.segment button.on{background:var(--flade);color:var(--tekst);box-shadow:var(--skygge),0 0 0 1px var(--linje)}
+.datonav{height:56px;padding:0 24px;display:flex;align-items:center;gap:8px;border-top:1px solid var(--linje)}
+.datonav .titel{margin-right:auto;display:flex;align-items:baseline;gap:10px;min-width:0}
+.datonav .titel b{font-size:17px;font-weight:600;white-space:nowrap}
+.datonav .titel span{font-size:13px;color:var(--svag);white-space:nowrap}
 
 /* ---------- Personvælger ---------- */
-.personer{position:sticky;z-index:15;background:var(--glas);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--linje)}
-.personer-indre{display:flex;gap:8px;overflow-x:auto;padding:10px 24px;scrollbar-width:none}
+.personer{position:sticky;z-index:15;background:var(--bg);border-bottom:1px solid var(--linje)}
+.personer-indre{display:flex;gap:6px;overflow-x:auto;padding:10px 24px;scrollbar-width:none}
 .personer-indre::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--linje);background:var(--flade2);color:var(--tekst);border-radius:999px;padding:6px 14px 6px 6px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:8px;transition:all .15s}
-.chip:hover{border-color:var(--linje2)}
-.av{width:24px;height:24px;border-radius:50%;color:#fff;font-size:10px;font-weight:800;display:inline-grid;place-items:center;flex:none;letter-spacing:.3px}
-.chip.valgt{background:var(--brand2);border-color:var(--brand2);color:#fff;box-shadow:0 6px 16px rgba(61,139,253,.4)}
-.chip.valgt .av{box-shadow:0 0 0 2px rgba(255,255,255,.9)}
+.chip{flex:none;height:30px;border:1px solid var(--linje);background:var(--flade);color:var(--svag);border-radius:999px;padding:0 12px;font-weight:500;font-size:13px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.chip:hover{color:var(--tekst)}
+.chip.valgt{border-color:var(--brand);color:var(--tekst);background:var(--brandsvag)}
+.av{width:26px;height:26px;border-radius:50%;background:var(--flade2);border:1px solid var(--linje2);color:var(--svag);font-size:10.5px;font-weight:600;display:inline-grid;place-items:center;flex:none}
 
-main{padding:18px 24px 110px}
+main{padding:20px 24px 110px;max-width:1700px;margin:0 auto}
 
-/* ---------- Kort ---------- */
-.kort{background:var(--flade);border:1px solid var(--linje);border-radius:var(--r);box-shadow:var(--skygge);padding:14px 16px 14px 18px;margin-bottom:10px;cursor:pointer;position:relative;transition:transform .1s,border-color .15s;display:flex;gap:14px;align-items:flex-start;overflow:hidden}
-.kort:hover{border-color:var(--linje2)}
-.kort:active{transform:scale(.99)}
-.kort .stribe{position:absolute;left:0;top:0;bottom:0;width:4px;box-shadow:0 0 18px 2px currentColor}
-.kort .ik{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-size:20px;flex:none}
-.kort .krop{flex:1;min-width:0}
-.kort .titel{font-size:16.5px;font-weight:800;letter-spacing:-.2px;word-break:break-word}
-.kort .meta{color:var(--svag);font-size:13.5px;margin-top:2px}
-.kort .notehint{display:inline-flex;align-items:center;gap:6px;margin-top:9px;font-size:12px;font-weight:700;color:var(--accent);background:var(--accentlys);padding:4px 10px;border-radius:999px;border:1px solid rgba(255,176,32,.25)}
-.kort .pil-h{color:var(--svagere);font-size:22px;align-self:center}
-.badge{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--flade2);border:1px solid var(--linje);margin:7px 5px 0 0;color:var(--svag)}
-.sektion{display:flex;align-items:center;gap:10px;margin:20px 2px 10px;font-size:11.5px;font-weight:800;color:var(--svag);text-transform:uppercase;letter-spacing:1.2px}
-.sektion:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--linje2),transparent)}
-.tom{text-align:center;color:var(--svag);padding:54px 16px;background:var(--flade);border:1px dashed var(--linje2);border-radius:var(--r)}
-.tom .stor{font-size:44px;margin-bottom:8px}
+/* ---------- Nøgletal ---------- */
+.kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--linje);border-radius:var(--r);background:var(--flade);margin-bottom:20px;overflow:hidden}
+.kpi-kort{padding:12px 16px;border-left:1px solid var(--linje)}
+.kpi-kort:first-child{border-left:0}
+.kpi-kort .lbl{font-size:12px;color:var(--svag)}
+.kpi-kort .tal{font-size:22px;font-weight:600;margin-top:2px;font-variant-numeric:tabular-nums}
+.kpi-kort .tal small{font-size:13px;color:var(--svag);font-weight:500}
+.kpi-kort.alarm .tal{color:var(--service)}
+
+/* ---------- Lister og kort ---------- */
+.sektion{margin:24px 0 8px;font-size:12px;font-weight:600;color:var(--svag);text-transform:uppercase;letter-spacing:.6px}
+.liste{background:var(--flade);border:1px solid var(--linje);border-radius:var(--r);overflow:hidden}
+.raekke{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-top:1px solid var(--linje);cursor:pointer}
+.raekke:first-child{border-top:0}
+.raekke:hover{background:var(--hover)}
+.raekke .mk{width:3px;align-self:stretch;border-radius:3px;background:var(--brand);flex:none}
+.raekke.service .mk{background:var(--service)}
+.raekke.fri .mk{background:var(--linje2)}
+.raekke .krop{flex:1;min-width:0}
+.raekke .titel{font-weight:500;word-break:break-word}
+.raekke.fri .titel{color:var(--svag)}
+.raekke .meta{color:var(--svag);font-size:12.5px;margin-top:2px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
+.raekke .meta span{display:inline-flex;align-items:center;gap:5px}
+.raekke .pil-h{color:var(--svagere);align-self:center}
+.notetag{color:var(--tekst)}
+.prik{width:7px;height:7px;border-radius:50%;display:inline-block;flex:none}
+.prik.booket{background:var(--gron)}.prik.afventer{background:var(--service)}.prik.udfort{background:var(--svagere)}
+.tom{text-align:center;color:var(--svag);padding:48px 16px;background:var(--flade);border:1px dashed var(--linje2);border-radius:var(--r)}
+.tom b{display:block;color:var(--tekst);font-weight:600;margin-bottom:4px}
 
 /* ---------- Teamoversigt (dag) ---------- */
-.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
-.pkort{background:var(--flade);border:1px solid var(--linje);border-radius:var(--r);box-shadow:var(--skygge);overflow:hidden;position:relative}
-.pkort:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--pf,#3d8bfd);box-shadow:0 0 16px 1px var(--pf,#3d8bfd)}
-.pkort .ph{display:flex;align-items:center;gap:10px;padding:13px 14px 11px;border-bottom:1px solid var(--linje)}
-.pkort .ph .av{width:32px;height:32px;font-size:11.5px}
-.pkort .ph b{flex:1;font-size:14.5px}
-.pkort .ph .plus{border:1px solid var(--linje);background:var(--flade2);color:var(--brand);border-radius:9px;width:30px;height:30px;font-size:17px;cursor:pointer}
-.opg{padding:11px 14px;border-top:1px solid var(--linje);cursor:pointer;display:flex;gap:10px;align-items:flex-start;transition:background .12s}
-.opg:first-of-type{border-top:0}
-.opg:hover{background:var(--flade2)}
-.opg .t{flex:1;min-width:0;word-break:break-word;font-weight:600}
-.opg .n{font-size:12px;color:var(--accent);margin-top:3px;font-weight:600}
-.fri{color:var(--svagere);font-style:italic;padding:11px 14px;font-size:13.5px}
+.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.pkort{background:var(--flade);border:1px solid var(--linje);border-radius:var(--r);overflow:hidden}
+.pkort .ph{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid var(--linje)}
+.pkort .ph b{flex:1;font-weight:600;font-size:13.5px}
+.pkort .ph .antal{color:var(--svag);font-size:12px}
+.pkort .raekke{padding:10px 12px}
+.fri-tekst{color:var(--svagere);padding:12px;font-size:13px}
 
 /* ---------- Uge-tavle (PC) ---------- */
-.tavle-wrap{background:var(--flade);border:1px solid var(--linje);border-radius:20px;box-shadow:var(--skygge);overflow:auto;max-height:calc(100vh - 300px)}
+.tavle-wrap{background:var(--flade);border:1px solid var(--linje);border-radius:var(--r);overflow:auto;max-height:calc(100vh - 250px)}
 table.tavle{border-collapse:separate;border-spacing:0;width:100%;min-width:900px;table-layout:fixed}
 .tavle th,.tavle td{border-bottom:1px solid var(--linje);border-right:1px solid var(--linje);vertical-align:top;padding:0}
 .tavle tr>*:last-child{border-right:0}
-.tavle thead th{position:sticky;top:0;z-index:3;background:var(--flade2);padding:12px 12px;text-align:left;font-size:12.5px}
-.tavle thead th .dn{font-weight:800;text-transform:uppercase;letter-spacing:1px;font-size:11px;color:var(--svag)}
-.tavle thead th .dd{color:var(--tekst);font-weight:800;font-size:18px;letter-spacing:-.3px}
-.tavle thead th.idag{background:linear-gradient(180deg,rgba(61,139,253,.30),rgba(61,139,253,.10));box-shadow:inset 0 -3px 0 var(--brand2)}
-.tavle thead th.idag .dn{color:var(--brand)}
-.tavle th.navn,.tavle td.navn{position:sticky;left:0;z-index:2;background:var(--flade);width:190px;padding:12px 14px;font-weight:700;font-size:13.5px}
-.tavle thead th.navn{z-index:4;background:var(--flade2);vertical-align:bottom;color:var(--svag);font-size:11px;text-transform:uppercase;letter-spacing:1px}
-.tavle td.navn .rk{display:flex;align-items:center;gap:10px}
-.tavle td.navn .av{width:30px;height:30px;font-size:11px}
-.tavle tbody tr:hover td{background-color:rgba(124,196,255,.035)}
-.tavle tbody tr:hover td.navn{background:var(--flade2)}
-.tavle td.celle{padding:7px;height:1px}
-.tavle td.celle.idag{background:rgba(61,139,253,.07)}
-.tavle td.celle.weekend{background:repeating-linear-gradient(135deg,transparent,transparent 7px,rgba(148,170,210,.05) 7px,rgba(148,170,210,.05) 14px)}
-.celle-indre{display:flex;flex-direction:column;gap:6px;min-height:44px;height:100%}
-.blok{border-radius:10px;padding:7px 9px 7px 11px;font-size:12.5px;line-height:1.35;cursor:pointer;border:1px solid transparent;word-break:break-word;font-weight:600;color:var(--tekst);transition:transform .1s,box-shadow .15s}
-.blok:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.25)}
-.blok .bn{font-size:11px;margin-top:3px;color:var(--accent);font-weight:700}
-.blok.service{background:linear-gradient(135deg,rgba(255,176,32,.18),rgba(255,122,26,.10));border-color:rgba(255,176,32,.3);color:var(--tekst)}
-.blok.service .bn{color:var(--svag)}
-.blok.ferie{background:repeating-linear-gradient(135deg,rgba(148,170,210,.10),rgba(148,170,210,.10) 6px,rgba(148,170,210,.05) 6px,rgba(148,170,210,.05) 12px);color:var(--svag);border-color:var(--linje)}
-.tilfoej{flex:1;min-height:30px;border:1px dashed transparent;border-radius:10px;background:transparent;color:transparent;cursor:pointer;font-size:18px;transition:all .15s}
+.tavle tbody tr:last-child td{border-bottom:0}
+.tavle thead th{position:sticky;top:0;z-index:3;background:var(--flade);padding:10px 12px;text-align:left;font-weight:500}
+.tavle thead th .dn{font-size:12px;color:var(--svag)}
+.tavle thead th .dd{font-size:15px;font-weight:600;margin-top:1px}
+.tavle thead th.idag{box-shadow:inset 0 -2px 0 var(--brand)}
+.tavle thead th.idag .dn,.tavle thead th.idag .dd{color:var(--brand)}
+.tavle th.navn,.tavle td.navn{position:sticky;left:0;z-index:2;background:var(--flade);width:200px;padding:10px 14px}
+.tavle thead th.navn{z-index:4;vertical-align:bottom;color:var(--svag);font-size:12px}
+.tavle td.navn .rk{display:flex;align-items:center;gap:10px;font-weight:500}
+.tavle td.celle{padding:6px;height:1px}
+.tavle td.celle.idag{background:var(--brandsvag)}
+.tavle td.celle.weekend{background:var(--flade2)}
+.celle-indre{display:flex;flex-direction:column;gap:4px;min-height:40px;height:100%}
+.blok{border-radius:6px;padding:6px 8px 6px 9px;font-size:12.5px;line-height:1.35;cursor:pointer;background:var(--flade2);border:1px solid var(--linje);box-shadow:inset 2px 0 0 var(--brand);word-break:break-word}
+.blok:hover{border-color:var(--linje2);background:var(--hover)}
+.blok .bn{font-size:11.5px;margin-top:2px;color:var(--svag);display:flex;align-items:center;gap:4px}
+.blok .bn svg.i{width:12px;height:12px;vertical-align:-1px}
+.blok.service{box-shadow:inset 2px 0 0 var(--service);background:var(--servicesvag)}
+.blok.ferie{box-shadow:none;background:transparent;border-style:dashed;color:var(--svag)}
+.tilfoej{flex:1;min-height:28px;border:1px dashed transparent;border-radius:6px;background:transparent;color:transparent;cursor:pointer;display:grid;place-items:center}
 td.celle:hover .tilfoej{border-color:var(--linje2);color:var(--svag)}
-.ufordelt td{background:linear-gradient(180deg,rgba(255,176,32,.08),rgba(255,176,32,.03))!important}
+.ufordelt td.navn .rk{color:var(--service)}
 
 /* ---------- Mobil-uge ---------- */
-.mdag{background:var(--flade);border:1px solid var(--linje);border-radius:var(--r);box-shadow:var(--skygge);margin-bottom:12px;overflow:hidden}
-.mdag h3{margin:0;padding:11px 14px;font-size:14px;background:var(--flade2);border-bottom:1px solid var(--linje);display:flex;justify-content:space-between;align-items:center;text-transform:capitalize;font-weight:800}
-.mdag h3 .idag-tag{background:linear-gradient(135deg,#ffb020,#ff7a1a);color:#1a1000;border-radius:999px;padding:2px 10px;font-size:11px;text-transform:none}
+.mdag{margin-bottom:16px}
+.mdag h3{margin:0 0 6px;font-size:13px;font-weight:600;color:var(--svag);display:flex;gap:8px;align-items:center}
+.mdag h3 .idag-tag{color:var(--brand);text-transform:none}
 
 /* ---------- Bundbjælke (mobil) ---------- */
-.bund{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:20;background:var(--glas);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--linje2);border-radius:20px;display:flex;gap:4px;padding:6px;box-shadow:var(--skygge2)}
-.bund button{flex:1;border:0;border-radius:14px;padding:8px 4px;font-weight:700;font-size:11.5px;background:transparent;color:var(--svag);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
-.bund button .e{font-size:19px}
-.bund button.on{background:var(--brand2);color:#fff}
+.bund{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--flade);border-top:1px solid var(--linje);display:flex;padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
+.bund button{flex:1;border:0;border-radius:8px;padding:6px 4px;font-weight:500;font-size:11px;background:transparent;color:var(--svag);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bund button svg.i{width:20px;height:20px}
+.bund button.on{color:var(--brand)}
 
 /* ---------- Ark (detaljer / formular) ---------- */
-.slor{position:fixed;inset:0;background:rgba(3,7,16,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:50;display:flex;align-items:flex-end;justify-content:center;animation:ind .15s}
-.ark{background:var(--flade);border:1px solid var(--linje2);width:100%;max-width:580px;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;box-shadow:var(--skygge2);padding:8px 22px calc(22px + env(safe-area-inset-bottom));animation:op .22s cubic-bezier(.2,.8,.2,1)}
-.ark .greb{width:44px;height:5px;border-radius:9px;background:var(--linje2);margin:6px auto 14px}
-.ark h2{margin:0 0 4px;font-size:22px;line-height:1.25;word-break:break-word;letter-spacing:-.3px}
-.ark .under{color:var(--svag);font-size:14px}
-.ark .boks{margin-top:14px;padding:13px 15px;border-radius:14px;background:var(--flade2);border:1px solid var(--linje);white-space:pre-wrap;word-break:break-word}
-.ark .boks.note{background:var(--accentlys);border-color:rgba(255,176,32,.3)}
-.ark .boks h4{margin:0 0 5px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--svag)}
+.slor{position:fixed;inset:0;background:rgba(5,8,14,.55);z-index:50;display:flex;align-items:flex-end;justify-content:center;animation:ind .12s}
+.ark{background:var(--flade);border:1px solid var(--linje);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:14px 14px 0 0;box-shadow:var(--skygge2);padding:6px 20px calc(20px + env(safe-area-inset-bottom));animation:op .18s ease-out}
+.ark .greb{width:36px;height:4px;border-radius:9px;background:var(--linje2);margin:6px auto 14px}
+.ark .over{color:var(--svag);font-size:12.5px;display:flex;align-items:center;gap:8px}
+.ark h2{margin:8px 0 2px;font-size:19px;font-weight:600;line-height:1.3;word-break:break-word}
+.ark .under{color:var(--svag);font-size:13.5px}
+.ark .boks{margin-top:14px;padding:12px 14px;border-radius:8px;background:var(--flade2);border:1px solid var(--linje);white-space:pre-wrap;word-break:break-word}
+.ark .boks.note{border-left:3px solid var(--brand)}
+.ark .boks h4{margin:0 0 4px;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--svag)}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--svag);margin-top:10px}
 .knapper{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.k{flex:1;min-width:130px;border:1px solid var(--linje2);background:var(--flade2);border-radius:13px;padding:12px 14px;font-weight:800;font-size:14px;cursor:pointer;text-decoration:none;color:var(--tekst);display:inline-flex;justify-content:center;align-items:center;gap:8px;transition:transform .1s,filter .15s}
-.k:hover{filter:brightness(1.1)}
-.k:active{transform:translateY(1px)}
-.k.primaer{background:linear-gradient(135deg,#3d8bfd,#2563eb);border-color:transparent;color:#fff;box-shadow:0 8px 20px rgba(61,139,253,.35)}
-.k.gron{background:linear-gradient(135deg,#22c55e,#16a34a);border-color:transparent;color:#04130a;box-shadow:0 8px 20px rgba(34,197,94,.3)}
-.k.fare{color:var(--rod);border-color:rgba(255,107,107,.35);background:rgba(255,107,107,.08)}
+.k{flex:1;min-width:130px;height:42px;border:1px solid var(--linje2);background:var(--flade);border-radius:8px;padding:0 14px;font-weight:500;font-size:14px;cursor:pointer;color:var(--tekst);display:inline-flex;justify-content:center;align-items:center;gap:8px}
+.k:hover{background:var(--hover)}
+.k.primaer{background:var(--brand);border-color:var(--brand);color:#fff}
+.k.primaer:hover{filter:brightness(1.08)}
+.k.fare{color:var(--rod);border-color:rgba(229,72,77,.4)}
 .felt{margin-top:14px}
-.felt label{display:block;font-size:11px;font-weight:800;color:var(--svag);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
-.felt input,.felt textarea{width:100%;border:1px solid var(--linje2);border-radius:12px;padding:11px 13px;background:var(--bg);color:var(--tekst);font-size:15px;color-scheme:dark}
-:root[data-tema="lys"] .felt input,:root[data-tema="lys"] .felt textarea{background:#fff;color-scheme:light}
-.felt textarea{min-height:92px;resize:vertical}
-.felt input:focus,.felt textarea:focus{outline:2px solid var(--brand2);border-color:transparent}
+.felt label{display:block;font-size:12.5px;font-weight:500;color:var(--svag);margin-bottom:6px}
+.felt input,.felt textarea{width:100%;border:1px solid var(--linje2);border-radius:8px;padding:10px 12px;background:var(--bg);color:var(--tekst);font-size:15px}
+.felt textarea{min-height:90px;resize:vertical}
+.felt input:focus,.felt textarea:focus{outline:2px solid var(--brand);outline-offset:-1px;border-color:transparent}
 .raekke2{display:flex;gap:10px}.raekke2 .felt{flex:1}
 .vaelg{display:flex;flex-wrap:wrap;gap:6px}
-.vaelg .chip{font-size:12.5px}
 .lille{font-size:12.5px;color:var(--svag)}
-.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--flade3);border:1px solid var(--linje2);color:var(--tekst);padding:11px 18px;border-radius:14px;font-weight:700;z-index:60;box-shadow:var(--skygge2);animation:op .2s}
-@keyframes op{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
+.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:var(--tekst);color:var(--bg);padding:10px 16px;border-radius:8px;font-weight:500;z-index:60;box-shadow:var(--skygge2);animation:op .18s}
+@keyframes op{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+.toast{animation:none}
 @keyframes ind{from{opacity:0}to{opacity:1}}
-.indl main{opacity:.5;transition:opacity .2s}
-.spinner{width:38px;height:38px;border:3px solid var(--linje2);border-top-color:var(--brand2);border-radius:50%;animation:dr .8s linear infinite;margin:80px auto}
+.indl main{opacity:.55;transition:opacity .2s}
+.spinner{width:28px;height:28px;border:2px solid var(--linje2);border-top-color:var(--brand);border-radius:50%;animation:dr .8s linear infinite;margin:90px auto}
 @keyframes dr{to{transform:rotate(360deg)}}
 
 /* ---------- PIN ---------- */
-.pin{min-height:100vh;display:grid;place-items:center;padding:20px;position:relative;overflow:hidden}
-.pin:before,.pin:after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(90px);opacity:.55;z-index:-1}
-.pin:before{background:#3d8bfd;left:-160px;top:-160px}.pin:after{background:#7c3aed;right:-180px;bottom:-200px}
-.pinboks{background:var(--glas);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--linje2);border-radius:26px;padding:32px 26px;width:100%;max-width:370px;text-align:center;box-shadow:var(--skygge2)}
-.pinboks .logo{width:62px;height:62px;border-radius:18px;background:linear-gradient(135deg,#3d8bfd,#7c3aed);display:grid;place-items:center;font-size:30px;margin:0 auto 12px;box-shadow:0 10px 30px rgba(61,139,253,.5)}
-.pinboks h1{margin:0;font-size:24px;letter-spacing:-.4px}
-.pinboks input{width:100%;font-size:30px;text-align:center;letter-spacing:14px;padding:13px;border-radius:15px;border:1px solid var(--linje2);background:var(--bg);color:var(--tekst);margin:20px 0 8px}
-.pinboks .fejl{color:var(--rod);min-height:20px;font-size:14px}
+.pin{min-height:100vh;display:grid;place-items:center;padding:20px}
+.pinboks{background:var(--flade);border:1px solid var(--linje);border-radius:14px;padding:32px 28px;width:100%;max-width:360px;text-align:center;box-shadow:var(--skygge2)}
+.pinboks .logo{width:44px;height:44px;border-radius:11px;font-size:21px;margin:0 auto 14px}
+.pinboks h1{margin:0;font-size:20px;font-weight:600}
+.pinboks input{width:100%;font-size:26px;text-align:center;letter-spacing:12px;padding:11px;border-radius:8px;border:1px solid var(--linje2);background:var(--bg);color:var(--tekst);margin:20px 0 8px}
+.pinboks input:focus{outline:2px solid var(--brand);outline-offset:-1px}
+.pinboks .fejl{color:var(--rod);min-height:20px;font-size:13px}
 
 /* ---------- PC / mobil ---------- */
 @media (min-width:900px){
-  .ark{border-radius:24px;margin-bottom:6vh;align-self:center}
+  .ark{border-radius:14px;margin-bottom:8vh;align-self:center}
   .slor{align-items:center}
   .bund{display:none}
   main{padding-bottom:40px}
-  .kun-mobil{display:none!important}
 }
 @media (max-width:899px){
   .kun-pc{display:none!important}
-  .top-indre{padding:10px 12px;flex-wrap:nowrap;gap:6px}
-  .maerke{font-size:16px;min-width:0}
-  .maerke .ikon{width:34px;height:34px}
-  .maerke .rolle{display:none}
-  .datonav{padding:0 12px 12px}
-  .datonav .titel b{font-size:20px}
-  .personer-indre{padding:10px 12px}
-  main{padding:12px 12px 110px}
-  .kpi{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-  .kpi-kort{padding:10px 12px}.kpi-kort .tal{font-size:20px}.kpi-kort .ik{display:none}
+  .top-indre{padding:0 12px;gap:6px}
+  .maerke .skil,.maerke .rolle{display:none}
+  .datonav{padding:0 12px;height:52px}
+  .datonav .titel{flex-direction:column;gap:0}
+  .datonav .titel b{font-size:16px}
+  .datonav .titel span{font-size:12px}
+  .personer-indre{padding:8px 12px}
+  main{padding:14px 12px 100px}
+  .kpi{grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:16px}
+  .kpi-kort{padding:10px 12px}.kpi-kort .tal{font-size:19px}
   .kpi-kort:nth-child(n+4){display:none}
 }
-@media print{.top,.personer,.bund,.kpi{display:none}.tavle-wrap{max-height:none;overflow:visible}body:before{display:none}}
+@media print{.top,.personer,.bund,.kpi{display:none}.tavle-wrap{max-height:none;overflow:visible}}
 </style>
 </head>
 <body>
@@ -232,13 +226,13 @@ td.celle:hover .tilfoej{border-color:var(--linje2);color:var(--svag)}
 /* Forbindelse til Ventilux-serveren (Google). Ingen data eller koder ligger i denne fil. */
 var API = 'https://script.google.com/macros/s/AKfycbxxlIps5EA_Od25hsEyS2sXHtv3zTx5gf3v9un_1KlgwN2DEoyxJ5Pd25WazITWVtL8WQ/exec';
 (function () {
+  if (window.google && window.google.script) return; // (testvisning)
   function kald(fn, args, ok, fejl) {
     fetch(API, {method: 'POST', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify({fn: fn, args: args})})
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (r) { if (r && r.__fejl) throw new Error(r.__fejl); if (ok) ok(r); })
       .catch(function (e) { if (fejl) fejl(e); });
   }
-  var run = {};
   Object.defineProperty(window, 'google', {value: {script: {}}});
   Object.defineProperty(window.google.script, 'run', {get: function () {
     var ok, fejl, o = {
@@ -269,11 +263,8 @@ function kortDato(t) { var d = tilDato(t); return d.getDate() + '/' + (d.getMont
 function stort(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 function uge(t) { var d = tilDato(t); d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7); var w1 = new Date(d.getFullYear(), 0, 4); return 1 + Math.round(((d - w1) / 864e5 - 3 + (w1.getDay() + 6) % 7) / 7); }
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]; }); }
-var FARVER = ['#1667b0', '#1f9d55', '#c2410c', '#7c3aed', '#0e9488', '#be123c', '#a16207', '#9d174d', '#4338ca', '#15803d', '#0369a1', '#7e22ce'];
-function farve(n) { var i = S.personer.indexOf(n); return FARVER[(i < 0 ? 0 : i) % FARVER.length]; }
-function lys(hex) { return hex + (S.tema === 'lys' ? '1c' : '30'); }
 function init(n) { var p = String(n).split(/\s+/); return (p[0].charAt(0) + (p[1] ? p[1].charAt(0) : (p[0].charAt(1) || ''))).toUpperCase(); }
-function av(n, str) { return '<span class="av" style="background:' + farve(n) + (str ? ';width:' + str + 'px;height:' + str + 'px' : '') + '">' + esc(init(n)) + '</span>'; }
+function av(n) { return '<span class="av">' + esc(init(n)) + '</span>'; }
 function maps(t) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(t + ', Danmark'); }
 function erFri(t) { return /^(ferie|fri|syg|kursus|afspadsering)\b/i.test(String(t).trim()); }
 function tlfListe(t) { var ud = [], re = /(\+45[\s-]?)?(\d{2}[\s-]?\d{2}[\s-]?\d{2}[\s-]?\d{2})(?!\d)/g, m; t = String(t || ''); while ((m = re.exec(t))) { var n = m[2].replace(/\D/g, ''); if (ud.indexOf(n) < 0) ud.push(n); } return ud; }
@@ -284,6 +275,35 @@ function linkify(t) {
     .replace(/((?:\+45[\s-]?)?\d{2}[\s-]?\d{2}[\s-]?\d{2}[\s-]?\d{2})(?!\d)/g, function (x) { return '<a href="tel:' + x.replace(/[^\d+]/g, '') + '">' + x + '</a>'; });
 }
 function toast(t) { var d = document.createElement('div'); d.className = 'toast'; d.textContent = t; document.body.appendChild(d); setTimeout(function () { d.remove(); }, 2600); }
+function jsq(s) { return String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
+
+/* ---------- Ikoner (enkle streg-ikoner) ---------- */
+var IK = {
+  pin: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+  vaerktoej: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9l-3.8 3.8z"/>',
+  note: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/>',
+  kal: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  uge: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M9 10v12M15 10v12"/>',
+  hold: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+  person: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  venstre: '<path d="m15 18-6-6 6-6"/>', hoejre: '<path d="m9 18 6-6-6-6"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  opdater: '<path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/>',
+  mere: '<circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>',
+  sol: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  maane: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+  tlf: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',
+  rute: '<path d="m3 11 19-9-9 19-2-8-8-2z"/>',
+  ret: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+  fri: '<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>',
+  ark: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/>',
+  print: '<path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>',
+  ud: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',
+  slet: '<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>',
+  i_dag: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+};
+function ik(n) { return '<svg class="i" viewBox="0 0 24 24" aria-hidden="true">' + IK[n] + '</svg>'; }
+function statusKlasse(s) { return s === 'Booket' ? 'booket' : s === 'Udført' ? 'udfort' : 'afventer'; }
 
 /* ---------- Start og PIN ---------- */
 function start() {
@@ -294,10 +314,10 @@ function start() {
 }
 function visPin(fejl) {
   document.getElementById('app').innerHTML =
-    '<div class="pin"><div class="pinboks"><div class="logo">🗓️</div><h1>Ventilux Plan</h1>' +
-    '<div class="lille" style="margin-top:4px">Skriv PIN-koden for at se planen</div>' +
+    '<div class="pin"><div class="pinboks"><div class="logo">V</div><h1>Ventilux Plan</h1>' +
+    '<div class="lille" style="margin-top:4px">Skriv din PIN-kode</div>' +
     '<input id="pinfelt" type="password" inputmode="numeric" autocomplete="off" maxlength="8" placeholder="••••">' +
-    '<div class="fejl">' + esc(fejl) + '</div><button class="k primaer" style="width:100%" onclick="tjekPin()">Åbn planen</button></div></div>';
+    '<div class="fejl">' + esc(fejl) + '</div><button class="k primaer" style="width:100%" onclick="tjekPin()">Log ind</button></div></div>';
   var f = document.getElementById('pinfelt'); f.focus();
   f.addEventListener('keydown', function (e) { if (e.key === 'Enter') tjekPin(); });
 }
@@ -314,11 +334,12 @@ function indlaes(fraPin, stille) {
     if (res && res.fejl === 'pin') { gem('pin', ''); return visPin(fraPin ? 'Forkert PIN-kode – prøv igen' : ''); }
     gem('pin', S.pin);
     S.data = res; S.personer = res.personer; S.rolle = res.rolle;
-    if (S.person && S.personer.indexOf(S.person) < 0) S.person = '';
+    if (res.mig) S.person = res.mig;
+    else if (S.person && S.personer.indexOf(S.person) < 0) S.person = '';
     tegn();
   }).withFailureHandler(function () {
     document.body.classList.remove('indl');
-    if (!S.data) document.getElementById('app').innerHTML = '<div class="tom" style="margin:40px 16px"><div class="stor">📡</div>Kunne ikke hente planen.<br><br><button class="k primaer" onclick="indlaes()">Prøv igen</button></div>';
+    if (!S.data) document.getElementById('app').innerHTML = '<div class="tom" style="margin:40px 16px"><b>Kunne ikke hente planen</b>Tjek internetforbindelsen.<br><br><button class="k primaer" onclick="indlaes()">Prøv igen</button></div>';
     else toast('Kunne ikke opdatere – tjek forbindelsen');
   }).planHent(S.pin, iv.fra, iv.dage);
 }
@@ -329,60 +350,58 @@ function vaelgVisning(v) { S.visning = v; gem('visning', v); indlaes(); }
 function slaaWeekend() { S.weekend = !S.weekend; gem('weekend', S.weekend ? '1' : ''); tegn(); }
 function dagMed(dato) { for (var i = 0; i < S.data.dage.length; i++) if (S.data.dage[i].dato === dato) return S.data.dage[i]; return null; }
 
-/* ---------- Gem referencer til klik ---------- */
 var REF = [];
 function ref(o) { REF.push(o); return REF.length - 1; }
 
-/* ---------- Visninger ---------- */
-function opgaveKort(o, dato, visNavn) {
-  var fri = erFri(o.tekst), f = fri ? '#8a98a8' : farve(o.navn);
-  return '<div class="kort" onclick="visDetalje(' + ref({t: 'opg', o: o, dato: dato}) + ')">' +
-    '<span class="stribe" style="background:' + f + ';color:' + f + '"></span>' +
-    '<div class="ik" style="background:' + lys(f) + ';color:' + f + '">' + (fri ? '🌴' : '📍') + '</div>' +
-    '<div class="krop"><div class="titel">' + esc(o.tekst || 'Se note') + '</div>' +
-    (visNavn ? '<div class="meta">' + esc(o.navn) + '</div>' : '') +
-    (o.note ? '<div class="notehint">📝 Der er en note – tryk for at læse</div>' : '') + '</div>' +
-    '<div class="pil-h">›</div></div>';
+/* ---------- Rækker ---------- */
+function opgRaekke(o, dato, visNavn) {
+  var fri = erFri(o.tekst), meta = [];
+  if (visNavn) meta.push('<span>' + ik('person') + esc(o.navn) + '</span>');
+  if (o.note) meta.push('<span class="notetag">' + ik('note') + 'Note</span>');
+  return '<div class="raekke' + (fri ? ' fri' : '') + '" onclick="visDetalje(' + ref({t: 'opg', o: o, dato: dato}) + ')"><span class="mk"></span>' +
+    '<div class="krop"><div class="titel">' + esc(o.tekst || 'Se note') + '</div>' + (meta.length ? '<div class="meta">' + meta.join('') + '</div>' : '') + '</div>' +
+    '<span class="pil-h">' + ik('hoejre') + '</span></div>';
 }
-function serviceKort(s, dato) {
-  return '<div class="kort" onclick="visDetalje(' + ref({t: 'srv', s: s, dato: dato}) + ')">' +
-    '<span class="stribe" style="background:var(--accent);color:var(--accent)"></span>' +
-    '<div class="ik" style="background:var(--accentlys);color:var(--accent)">🔧</div>' +
-    '<div class="krop"><div class="titel">' + esc(s.kunde) + '</div>' +
-    '<div class="meta">' + esc(s.opgave) + ' · ca. ' + String(s.timer).replace('.', ',') + ' t' + (s.dag ? ' · dag ' + s.dag : '') + '</div>' +
-    '<span class="badge">' + esc(s.emo) + ' ' + esc(s.status) + '</span>' +
-    '<span class="badge">👷 ' + esc(s.ansvarlige.join(', ') || 'Ikke fordelt endnu') + '</span></div>' +
-    '<div class="pil-h">›</div></div>';
+function srvRaekke(s, dato, visFolk) {
+  return '<div class="raekke service" onclick="visDetalje(' + ref({t: 'srv', s: s, dato: dato}) + ')"><span class="mk"></span>' +
+    '<div class="krop"><div class="titel">' + esc(s.kunde) + '</div><div class="meta">' +
+    '<span>' + ik('vaerktoej') + 'Service · ' + esc(s.opgave) + '</span>' +
+    '<span><i class="prik ' + statusKlasse(s.status) + '"></i>' + esc(s.status) + '</span>' +
+    (visFolk ? '<span>' + ik('hold') + esc(s.ansvarlige.join(', ') || 'Ikke fordelt') + '</span>' : '') +
+    '</div></div><span class="pil-h">' + ik('hoejre') + '</span></div>';
 }
 function mine(dag, p) {
   return {op: dag.opgaver.filter(function (o) { return !p || o.navn === p; }), sv: dag.service.filter(function (s) { return !p || s.ansvarlige.indexOf(p) >= 0; })};
 }
 
+/* ---------- Visninger ---------- */
 function visDag() {
   var dag = S.data.dage[0], h = '';
   if (S.person) {
     var m = mine(dag, S.person);
-    if (!m.op.length && !m.sv.length) h += '<div class="tom"><div class="stor">☕</div><b>Ingen opgaver denne dag</b><div class="lille" style="margin-top:4px">Swipe eller brug pilene for at se andre dage.</div></div>';
-    m.op.forEach(function (o) { h += opgaveKort(o, dag.dato, false); });
-    if (m.sv.length) { h += '<div class="sektion">🔧 Service-besøg</div>'; m.sv.forEach(function (s) { h += serviceKort(s, dag.dato); }); }
-    if (S.rolle === 'admin') h += '<button class="k" style="width:100%;margin-top:6px" onclick="nyOpgave(\'' + dag.dato + '\',[\'' + jsq(S.person) + '\'])">＋ Tilføj opgave til ' + esc(S.person) + '</button>';
+    if (!m.op.length && !m.sv.length) h += '<div class="tom"><b>Ingen opgaver denne dag</b>Brug pilene for at se andre dage.</div>';
+    else {
+      h += '<div class="liste">';
+      m.op.forEach(function (o) { h += opgRaekke(o, dag.dato, false); });
+      m.sv.forEach(function (s) { h += srvRaekke(s, dag.dato, true); });
+      h += '</div>';
+    }
+    if (S.rolle === 'admin') h += '<button class="k" style="width:100%;margin-top:12px" onclick="nyOpgave(\'' + dag.dato + '\',[\'' + jsq(S.person) + '\'])">' + ik('plus') + 'Tilføj opgave</button>';
     return h;
   }
   h += '<div class="team">';
   S.personer.forEach(function (p) {
-    var m = mine(dag, p);
-    h += '<div class="pkort" style="--pf:' + farve(p) + '"><div class="ph">' + av(p) + '<b>' + esc(p) + '</b>' +
-      (S.rolle === 'admin' ? '<button class="plus" title="Tilføj opgave" onclick="nyOpgave(\'' + dag.dato + '\',[\'' + jsq(p) + '\'])">＋</button>' : '') + '</div>';
-    if (!m.op.length && !m.sv.length) h += '<div class="fri">Intet planlagt</div>';
-    m.op.forEach(function (o) {
-      h += '<div class="opg" onclick="visDetalje(' + ref({t: 'opg', o: o, dato: dag.dato}) + ')"><span>' + (erFri(o.tekst) ? '🌴' : '📍') + '</span><div class="t">' + esc(o.tekst || 'Se note') + (o.note ? '<div class="n">📝 ' + esc(o.note.split('\n')[0]).slice(0, 80) + '</div>' : '') + '</div></div>';
-    });
-    m.sv.forEach(function (s) { h += '<div class="opg" onclick="visDetalje(' + ref({t: 'srv', s: s, dato: dag.dato}) + ')"><span>🔧</span><div class="t">' + esc(s.kunde) + '<div class="n" style="color:var(--svag)">' + esc(s.opgave) + '</div></div></div>'; });
+    var m = mine(dag, p), n = m.op.length + m.sv.length;
+    h += '<div class="pkort"><div class="ph">' + av(p) + '<b>' + esc(p) + '</b>' + (n ? '<span class="antal">' + n + '</span>' : '') +
+      (S.rolle === 'admin' ? '<button class="tk ikon" title="Tilføj opgave" onclick="nyOpgave(\'' + dag.dato + '\',[\'' + jsq(p) + '\'])">' + ik('plus') + '</button>' : '') + '</div>';
+    if (!n) h += '<div class="fri-tekst">Intet planlagt</div>';
+    m.op.forEach(function (o) { h += opgRaekke(o, dag.dato, false); });
+    m.sv.forEach(function (s) { h += srvRaekke(s, dag.dato, false); });
     h += '</div>';
   });
   h += '</div>';
   var uf = dag.service.filter(function (s) { return !s.ansvarlige.length; });
-  if (uf.length) { h += '<div class="sektion">🔧 Service – ikke fordelt endnu (' + uf.length + ')</div>'; uf.forEach(function (s) { h += serviceKort(s, dag.dato); }); }
+  if (uf.length) { h += '<div class="sektion">Service – ikke fordelt (' + uf.length + ')</div><div class="liste">'; uf.forEach(function (s) { h += srvRaekke(s, dag.dato, false); }); h += '</div>'; }
   return h;
 }
 
@@ -391,24 +410,21 @@ function visUgeMobil() {
   S.data.dage.forEach(function (dag) {
     var m = mine(dag, S.person);
     if (erWeekend(dag.dato) && !m.op.length && !m.sv.length && !S.weekend) return;
-    h += '<div class="mdag"><h3><span>' + esc(langDato(dag.dato)) + '</span>' + (dag.dato === idag ? '<span class="idag-tag">I dag</span>' : '') + '</h3>';
-    if (!m.op.length && !m.sv.length) h += '<div class="fri">Intet planlagt</div>';
-    m.op.forEach(function (o) { h += '<div class="opg" onclick="visDetalje(' + ref({t: 'opg', o: o, dato: dag.dato}) + ')"><span>' + (erFri(o.tekst) ? '🌴' : '📍') + '</span><div class="t">' + (S.person ? '' : '<b style="color:' + farve(o.navn) + '">' + esc(o.navn) + ':</b> ') + esc(o.tekst || 'Se note') + (o.note ? ' <span class="n">📝</span>' : '') + '</div></div>'; });
-    m.sv.forEach(function (s) { h += '<div class="opg" onclick="visDetalje(' + ref({t: 'srv', s: s, dato: dag.dato}) + ')"><span>🔧</span><div class="t">' + esc(s.kunde) + '</div></div>'; });
-    h += '</div>';
+    h += '<div class="mdag"><h3><span>' + esc(stort(langDato(dag.dato))) + '</span>' + (dag.dato === idag ? '<span class="idag-tag">· i dag</span>' : '') + '</h3><div class="liste">';
+    if (!m.op.length && !m.sv.length) h += '<div class="fri-tekst">Intet planlagt</div>';
+    m.op.forEach(function (o) { h += opgRaekke(o, dag.dato, !S.person); });
+    m.sv.forEach(function (s) { h += srvRaekke(s, dag.dato, !S.person); });
+    h += '</div></div>';
   });
-  return h || '<div class="tom"><div class="stor">☕</div>Intet planlagt i denne uge</div>';
+  return h || '<div class="tom"><b>Intet planlagt</b>Der er ingen opgaver i denne uge.</div>';
 }
 
 function visTavle() {
   var idag = idagTekst();
-  var dage = S.data.dage.filter(function (d) {
-    if (!erWeekend(d.dato) || S.weekend) return true;
-    return d.opgaver.length || d.service.length;
-  });
+  var dage = S.data.dage.filter(function (d) { return !erWeekend(d.dato) || S.weekend || d.opgaver.length || d.service.length; });
   var pers = S.person ? [S.person] : S.personer;
   var h = '<div class="tavle-wrap"><table class="tavle"><thead><tr><th class="navn">Medarbejder</th>';
-  dage.forEach(function (d) { h += '<th class="' + (d.dato === idag ? 'idag' : '') + '"><div class="dn">' + esc(DAGE[tilDato(d.dato).getDay()]) + (d.dato === idag ? ' · i dag' : '') + '</div><div class="dd">' + tilDato(d.dato).getDate() + '. ' + MDR[tilDato(d.dato).getMonth()].slice(0, 3) + '</div></th>'; });
+  dage.forEach(function (d) { var dt = tilDato(d.dato); h += '<th class="' + (d.dato === idag ? 'idag' : '') + '"><div class="dn">' + esc(stort(DAGE[dt.getDay()])) + (d.dato === idag ? ' · i dag' : '') + '</div><div class="dd">' + dt.getDate() + '. ' + MDR[dt.getMonth()].slice(0, 3) + '</div></th>'; });
   h += '</tr></thead><tbody>';
   pers.forEach(function (p) {
     h += '<tr><td class="navn"><div class="rk">' + av(p) + '<span>' + esc(p) + '</span></div></td>';
@@ -416,73 +432,27 @@ function visTavle() {
       var m = mine(d, p);
       h += '<td class="celle' + (d.dato === idag ? ' idag' : '') + (erWeekend(d.dato) ? ' weekend' : '') + '"><div class="celle-indre">';
       m.op.forEach(function (o) {
-        var fri = erFri(o.tekst), f = farve(p);
-        h += '<div class="blok' + (fri ? ' ferie' : '') + '" style="' + (fri ? '' : 'background:' + lys(f) + ';border-color:' + f + '45;box-shadow:inset 3px 0 0 ' + f) + '" onclick="visDetalje(' + ref({t: 'opg', o: o, dato: d.dato}) + ')">' +
-          (fri ? '🌴 ' : '') + esc(o.tekst || 'Se note') + (o.note ? '<div class="bn">📝 note</div>' : '') + '</div>';
+        var fri = erFri(o.tekst);
+        h += '<div class="blok' + (fri ? ' ferie' : '') + '" onclick="visDetalje(' + ref({t: 'opg', o: o, dato: d.dato}) + ')">' + esc(o.tekst || 'Se note') + (o.note ? '<div class="bn">' + ik('note') + 'Note</div>' : '') + '</div>';
       });
-      m.sv.forEach(function (s) { h += '<div class="blok service" onclick="visDetalje(' + ref({t: 'srv', s: s, dato: d.dato}) + ')">🔧 ' + esc(s.kunde) + '<div class="bn">' + esc(s.emo + ' ' + s.status) + '</div></div>'; });
-      if (S.rolle === 'admin' && !m.op.length) h += '<button class="tilfoej" title="Tilføj opgave" onclick="nyOpgave(\'' + d.dato + '\',[\'' + jsq(p) + '\'])">＋</button>';
+      m.sv.forEach(function (s) { h += '<div class="blok service" onclick="visDetalje(' + ref({t: 'srv', s: s, dato: d.dato}) + ')">' + esc(s.kunde) + '<div class="bn"><i class="prik ' + statusKlasse(s.status) + '"></i>Service</div></div>'; });
+      if (S.rolle === 'admin' && !m.op.length) h += '<button class="tilfoej" title="Tilføj opgave" onclick="nyOpgave(\'' + d.dato + '\',[\'' + jsq(p) + '\'])">' + ik('plus') + '</button>';
       h += '</div></td>';
     });
     h += '</tr>';
   });
-  if (!S.person) {
-    var harUf = dage.some(function (d) { return d.service.some(function (s) { return !s.ansvarlige.length; }); });
-    if (harUf) {
-      h += '<tr class="ufordelt"><td class="navn"><div class="rk"><span class="av" style="background:var(--accent)">🔧</span><span>Service – ikke fordelt</span></div></td>';
-      dage.forEach(function (d) {
-        h += '<td class="celle"><div class="celle-indre">';
-        d.service.filter(function (s) { return !s.ansvarlige.length; }).forEach(function (s) { h += '<div class="blok service" onclick="visDetalje(' + ref({t: 'srv', s: s, dato: d.dato}) + ')">🔧 ' + esc(s.kunde) + '<div class="bn">' + esc(s.opgave) + '</div></div>'; });
-        h += '</div></td>';
-      });
-      h += '</tr>';
-    }
+  if (!S.person && dage.some(function (d) { return d.service.some(function (s) { return !s.ansvarlige.length; }); })) {
+    h += '<tr class="ufordelt"><td class="navn"><div class="rk">' + ik('vaerktoej') + '<span>Service – ikke fordelt</span></div></td>';
+    dage.forEach(function (d) {
+      h += '<td class="celle' + (d.dato === idag ? ' idag' : '') + '"><div class="celle-indre">';
+      d.service.filter(function (s) { return !s.ansvarlige.length; }).forEach(function (s) { h += '<div class="blok service" onclick="visDetalje(' + ref({t: 'srv', s: s, dato: d.dato}) + ')">' + esc(s.kunde) + '<div class="bn">' + esc(s.opgave) + '</div></div>'; });
+      h += '</div></td>';
+    });
+    h += '</tr>';
   }
   return h + '</tbody></table></div>';
 }
 
-function jsq(s) { return String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
-
-function tegn() {
-  REF = [];
-  var uge7 = S.visning === 'uge', titel, under;
-  if (uge7) { var f = S.data.dage[0].dato, t = S.data.dage[6].dato; titel = 'Uge ' + uge(f); under = kortDato(f) + ' – ' + kortDato(t) + ' ' + tilDato(t).getFullYear(); }
-  else { titel = stort(langDato(S.dato)); under = (S.dato === idagTekst() ? 'I dag · ' : '') + 'uge ' + uge(S.dato); }
-  var chips = '<button class="chip' + (S.person ? '' : ' valgt') + '" onclick="vaelgPerson(\'\')"><span class="av" style="background:#5b6b7d">👥</span>Hele holdet</button>';
-  S.personer.forEach(function (p) { chips += '<button class="chip' + (S.person === p ? ' valgt' : '') + '" onclick="vaelgPerson(\'' + jsq(p) + '\')">' + av(p) + esc(p) + '</button>'; });
-  var indhold = uge7 ? (PC ? visTavle() : visUgeMobil()) : visDag();
-  document.getElementById('app').innerHTML =
-    '<div class="top"><div class="top-indre">' +
-      '<div class="maerke"><span class="ikon">🗓️</span><div>Ventilux Plan<small>' + esc(S.person || 'Hele holdet') + '</small></div>' + (S.rolle === 'admin' ? '<span class="rolle">Ledelse</span>' : '') + '</div>' +
-      '<div class="segment kun-pc"><button class="' + (uge7 ? '' : 'on') + '" onclick="vaelgVisning(\'dag\')">Dag</button><button class="' + (uge7 ? 'on' : '') + '" onclick="vaelgVisning(\'uge\')">Uge</button></div>' +
-      (uge7 ? '<button class="tk kun-pc" onclick="slaaWeekend()">' + (S.weekend ? 'Skjul weekend' : 'Vis weekend') + '</button>' : '') +
-      (S.rolle === 'admin' ? '<button class="tk orange" onclick="nyOpgave(\'' + S.dato + '\',' + (S.person ? '[\'' + jsq(S.person) + '\']' : '[]') + ')">＋<span class="kun-pc"> Ny opgave</span></button>' : '') +
-      (S.person ? '<button class="tk" onclick="visKalender()">📅 <span class="kun-pc">Min kalender</span></button>' : '') +
-      '<span class="ur kun-pc" id="ur"></span>' +
-      '<button class="tk kun-pc" onclick="indlaes()">↻ Opdatér</button>' +
-      '<button class="tk" onclick="skiftTema()" title="Skift lyst/mørkt tema">' + (S.tema === 'lys' ? '🌙' : '☀️') + '</button>' +
-      '<button class="tk" onclick="visMenu()" title="Mere">⋯</button>' +
-    '</div><div class="datonav"><button class="tk pil" onclick="skift(-1)" aria-label="Forrige">‹</button>' +
-      '<div class="titel"><b>' + esc(titel) + '</b><span>' + esc(under) + '</span></div>' +
-      (S.dato === idagTekst() || (uge7 && mandag(S.dato) === mandag(idagTekst())) ? '' : '<button class="tk hvid" onclick="iDag()">I dag</button>') +
-      '<button class="tk pil" onclick="skift(1)" aria-label="Næste">›</button></div></div>' +
-    '<div class="personer"><div class="personer-indre">' + chips + '</div></div>' +
-    '<main>' + kpiHtml() + indhold + '<div class="lille" style="text-align:center;margin-top:18px">Opdateret kl. ' + esc(S.data.opdateret) + '</div></main>' +
-    '<nav class="bund"><button class="' + (uge7 ? '' : 'on') + '" onclick="vaelgVisning(\'dag\')"><span class="e">📅</span>Dag</button>' +
-      '<button class="' + (uge7 ? 'on' : '') + '" onclick="vaelgVisning(\'uge\')"><span class="e">🗓️</span>Uge</button>' +
-      '<button onclick="iDag()"><span class="e">⏱️</span>I dag</button>' +
-      '<button onclick="indlaes()"><span class="e">↻</span>Opdatér</button></nav>';
-  opdaterUr();
-  var top = document.querySelector('.top'); document.querySelector('.personer').style.top = top.offsetHeight + 'px';
-  var v = document.querySelector('.chip.valgt'); if (v && v.scrollIntoView) v.scrollIntoView({inline: 'center', block: 'nearest'});
-}
-
-
-/* ---------- Tema, ur og nøgletal ---------- */
-function saetTema(t) { S.tema = t; document.documentElement.setAttribute('data-tema', t === 'lys' ? 'lys' : 'moerk'); }
-function skiftTema() { saetTema(S.tema === 'lys' ? 'moerk' : 'lys'); gem('tema', S.tema); if (S.data) tegn(); }
-function opdaterUr() { var e = document.getElementById('ur'); if (!e) return; var d = new Date(); e.textContent = '🕒 ' + ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); }
-setInterval(opdaterUr, 15000);
 function kpiHtml() {
   var idag = idagTekst(), fokus = dagMed(idag) || S.data.dage[0];
   var navn = fokus.dato === idag ? 'i dag' : kortDato(fokus.dato);
@@ -492,16 +462,52 @@ function kpiHtml() {
   var arb = {}; op.forEach(function (o) { if (!erFri(o.tekst)) arb[o.navn] = 1; });
   var sv = fokus.service.filter(function (s) { return !p || s.ansvarlige.indexOf(p) >= 0; });
   var uf = 0; S.data.dage.forEach(function (d) { uf += d.service.filter(function (s) { return !s.ansvarlige.length; }).length; });
-  var noter = op.filter(function (o) { return o.note; }).length;
-  function k(ik, tal, lbl, glow, cls) { return '<div class="kpi-kort ' + (cls || '') + '" style="--glow:' + glow + '"><span class="ik">' + ik + '</span><div class="tal">' + tal + '</div><div class="lbl">' + lbl + '</div></div>'; }
+  function k(lbl, tal, cls) { return '<div class="kpi-kort ' + (cls || '') + '"><div class="lbl">' + lbl + '</div><div class="tal">' + tal + '</div></div>'; }
   return '<div class="kpi">' +
-    k('📍', op.length - fri.length, 'Opgaver ' + navn, 'rgba(61,139,253,.30)') +
-    (p ? k('📝', noter, 'Med noter ' + navn, 'rgba(255,176,32,.28)') : k('👷', Object.keys(arb).length + '<span style="font-size:15px;color:var(--svag)"> / ' + S.personer.length + '</span>', 'På arbejde ' + navn, 'rgba(34,197,94,.28)')) +
-    k('🔧', sv.length, 'Service ' + navn, 'rgba(255,176,32,.28)') +
-    k('🌴', fri.length, 'Fri / ferie ' + navn, 'rgba(168,85,247,.28)') +
-    k('⚠️', uf, 'Service ikke fordelt' + (S.visning === 'uge' ? ' i ugen' : ''), 'rgba(255,107,107,.28)', uf ? 'alarm' : '') +
+    k('Opgaver ' + navn, op.length - fri.length) +
+    (p ? k('Fri / ferie ' + navn, fri.length) : k('På arbejde ' + navn, Object.keys(arb).length + ' <small>af ' + S.personer.length + '</small>')) +
+    k('Service ' + navn, sv.length) +
+    k('Service ikke fordelt' + (S.visning === 'uge' ? ' (uge)' : ''), uf, uf ? 'alarm' : '') +
     '</div>';
 }
+
+function tegn() {
+  REF = [];
+  var uge7 = S.visning === 'uge', titel, under;
+  if (uge7) { var f = S.data.dage[0].dato, t = S.data.dage[6].dato; titel = 'Uge ' + uge(f); under = kortDato(f) + ' – ' + kortDato(t) + ' ' + tilDato(t).getFullYear(); }
+  else { titel = stort(langDato(S.dato)); under = (S.dato === idagTekst() ? 'I dag · ' : '') + 'uge ' + uge(S.dato); }
+  var chips = '<button class="chip' + (S.person ? '' : ' valgt') + '" onclick="vaelgPerson(\'\')">' + ik('hold') + 'Alle</button>';
+  S.personer.forEach(function (p) { chips += '<button class="chip' + (S.person === p ? ' valgt' : '') + '" onclick="vaelgPerson(\'' + jsq(p) + '\')">' + esc(p) + '</button>'; });
+  var indhold = uge7 ? (PC ? visTavle() : visUgeMobil()) : visDag();
+  var erIdag = S.dato === idagTekst() || (uge7 && mandag(S.dato) === mandag(idagTekst()));
+  document.getElementById('app').innerHTML =
+    '<div class="top"><div class="top-indre">' +
+      '<div class="maerke"><span class="logo">V</span><b>Ventilux Plan</b><span class="skil">/</span><small>' + esc(S.person || 'Hele holdet') + '</small>' + (S.rolle === 'admin' ? '<span class="rolle kun-pc">Ledelse</span>' : '') + '</div>' +
+      (S.rolle === 'admin' ? '<button class="tk primaer" onclick="nyOpgave(\'' + S.dato + '\',' + (S.person ? '[\'' + jsq(S.person) + '\']' : '[]') + ')">' + ik('plus') + '<span class="kun-pc">Ny opgave</span></button>' : '') +
+      (S.person ? '<button class="tk" onclick="visKalender()" title="Min kalender">' + ik('kal') + '<span class="kun-pc">Min kalender</span></button>' : '') +
+      '<button class="tk ikon" onclick="skiftTema()" title="Skift lyst/mørkt tema">' + ik(S.tema === 'lys' ? 'maane' : 'sol') + '</button>' +
+      '<button class="tk ikon" onclick="visMenu()" title="Mere">' + ik('mere') + '</button>' +
+    '</div><div class="datonav">' +
+      '<div class="titel"><b>' + esc(titel) + '</b><span>' + esc(under) + '</span></div>' +
+      '<div class="segment kun-pc"><button class="' + (uge7 ? '' : 'on') + '" onclick="vaelgVisning(\'dag\')">Dag</button><button class="' + (uge7 ? 'on' : '') + '" onclick="vaelgVisning(\'uge\')">Uge</button></div>' +
+      (uge7 ? '<button class="tk kun-pc" onclick="slaaWeekend()">' + (S.weekend ? 'Skjul weekend' : 'Vis weekend') + '</button>' : '') +
+      '<button class="tk kun-pc ikon" onclick="indlaes()" title="Opdatér">' + ik('opdater') + '</button>' +
+      (erIdag ? '' : '<button class="tk" onclick="iDag()">I dag</button>') +
+      '<button class="tk ikon" onclick="skift(-1)" aria-label="Forrige">' + ik('venstre') + '</button>' +
+      '<button class="tk ikon" onclick="skift(1)" aria-label="Næste">' + ik('hoejre') + '</button></div></div>' +
+    (S.data.mig ? '' : '<div class="personer"><div class="personer-indre">' + chips + '</div></div>') +
+    '<main>' + kpiHtml() + indhold + '<div class="lille" style="text-align:center;margin-top:18px">Opdateret kl. ' + esc(S.data.opdateret) + '</div></main>' +
+    '<nav class="bund"><button class="' + (uge7 ? '' : 'on') + '" onclick="vaelgVisning(\'dag\')">' + ik('kal') + 'Dag</button>' +
+      '<button class="' + (uge7 ? 'on' : '') + '" onclick="vaelgVisning(\'uge\')">' + ik('uge') + 'Uge</button>' +
+      '<button onclick="iDag()">' + ik('i_dag') + 'I dag</button>' +
+      '<button onclick="indlaes()">' + ik('opdater') + 'Opdatér</button></nav>';
+  var top = document.querySelector('.top'), pb = document.querySelector('.personer'); if (pb) pb.style.top = top.offsetHeight + 'px';
+  var v = document.querySelector('.chip.valgt'); if (v && v.scrollIntoView) v.scrollIntoView({inline: 'center', block: 'nearest'});
+}
+
+/* ---------- Tema ---------- */
+function saetTema(t) { S.tema = t; document.documentElement.setAttribute('data-tema', t === 'lys' ? 'lys' : 'moerk'); var m = document.querySelector('meta[name=theme-color]'); if (m) m.content = t === 'lys' ? '#ffffff' : '#0c1018'; }
+function skiftTema() { saetTema(S.tema === 'lys' ? 'moerk' : 'lys'); gem('tema', S.tema); if (S.data) tegn(); }
 
 /* ---------- Ark: detaljer ---------- */
 function aabnArk(html) {
@@ -509,30 +515,31 @@ function aabnArk(html) {
 }
 function lukArk() { document.getElementById('lag').innerHTML = ''; }
 document.addEventListener('keydown', function (e) { if (e.key === 'Escape') lukArk(); });
+function ringKnap(n) { return '<a class="k" href="tel:' + n + '">' + ik('tlf') + 'Ring ' + n.replace(/(\d{2})(?=\d)/g, '$1 ') + '</a>'; }
 
 function visDetalje(i) {
   var r = REF[i], h = '';
   if (r.t === 'opg') {
     var o = r.o, fri = erFri(o.tekst), tl = tlfListe(o.tekst + ' ' + o.note);
-    h += '<div class="lille" style="display:flex;align-items:center;gap:8px">' + av(o.navn, 22) + esc(o.navn) + ' · ' + esc(stort(langDato(r.dato))) + '</div>';
-    h += '<h2 style="margin-top:10px">' + (fri ? '🌴 ' : '📍 ') + esc(o.tekst || 'Opgave') + '</h2>';
-    if (o.note) h += '<div class="boks note"><h4>📝 Note fra ledelsen</h4>' + linkify(o.note) + '</div>';
-    else h += '<div class="lille" style="margin-top:10px">Ingen ekstra note til denne opgave.</div>';
-    var andre = (dagMed(r.dato) || {opgaver: []}).opgaver.filter(function (x) { return x.navn !== o.navn && x.tekst && x.tekst === o.tekst; }).map(function (x) { return x.navn; });
-    if (andre.length) h += '<div class="boks"><h4>👥 Også på opgaven</h4>' + esc(andre.join(', ')) + '</div>';
-    h += '<div class="knapper">' + (fri || !o.tekst ? '' : '<a class="k primaer" href="' + maps(o.tekst) + '" target="_blank">🗺️ Vis rute</a>');
-    tl.forEach(function (n) { h += '<a class="k gron" href="tel:' + n + '">📞 Ring ' + n.replace(/(\d{2})(?=\d)/g, '$1 ') + '</a>'; });
-    if (S.rolle === 'admin') h += '<button class="k" onclick="retOpgave(' + i + ')">✏️ Ret</button>';
+    h += '<div class="over">' + av(o.navn) + esc(o.navn) + ' · ' + esc(stort(langDato(r.dato))) + '</div>';
+    h += '<h2>' + esc(o.tekst || 'Opgave') + '</h2>';
+    if (o.note) h += '<div class="boks note"><h4>Note</h4>' + linkify(o.note) + '</div>';
+    else if (!fri) h += '<div class="lille" style="margin-top:8px">Ingen note til denne opgave.</div>';
+    var andre = o.med || (dagMed(r.dato) || {opgaver: []}).opgaver.filter(function (x) { return x.navn !== o.navn && x.tekst && x.tekst === o.tekst; }).map(function (x) { return x.navn; });
+    if (andre.length) h += '<div class="boks"><h4>Også på opgaven</h4>' + esc(andre.join(', ')) + '</div>';
+    h += '<div class="knapper">' + (fri || !o.tekst ? '' : '<a class="k primaer" href="' + maps(o.tekst) + '" target="_blank">' + ik('rute') + 'Vis rute</a>');
+    tl.forEach(function (n) { h += ringKnap(n); });
+    if (S.rolle === 'admin') h += '<button class="k" onclick="retOpgave(' + i + ')">' + ik('ret') + 'Ret</button>';
     h += '<button class="k" onclick="lukArk()">Luk</button></div>';
   } else {
     var s = r.s, t2 = tlfListe(s.kontakt);
-    h += '<div class="lille">🔧 Service-besøg · ' + esc(stort(langDato(r.dato))) + (s.dag ? ' · dag ' + s.dag : '') + '</div>';
-    h += '<h2 style="margin-top:8px">' + esc(s.kunde) + '</h2><div class="under">' + esc(s.opgave) + ' · ca. ' + String(s.timer).replace('.', ',') + ' timer' + (s.mand > 1 ? ' · ' + s.mand + ' mand' : '') + '</div>';
-    h += '<span class="badge">' + esc(s.emo + ' ' + s.status) + '</span>';
-    h += '<div class="boks"><h4>👷 På opgaven</h4>' + esc(s.ansvarlige.join(', ') || 'Ikke fordelt endnu') + '</div>';
-    if (s.kontakt) h += '<div class="boks note"><h4>☎ Kontakt hos kunden</h4>' + linkify(s.kontakt) + '</div>';
-    h += '<div class="knapper"><a class="k primaer" href="' + maps(s.kunde) + '" target="_blank">🗺️ Vis rute</a>';
-    t2.forEach(function (n) { h += '<a class="k gron" href="tel:' + n + '">📞 Ring ' + n.replace(/(\d{2})(?=\d)/g, '$1 ') + '</a>'; });
+    h += '<div class="over">' + ik('vaerktoej') + 'Service-besøg · ' + esc(stort(langDato(r.dato))) + (s.dag ? ' · dag ' + s.dag : '') + '</div>';
+    h += '<h2>' + esc(s.kunde) + '</h2><div class="under">' + esc(s.opgave) + ' · ca. ' + String(s.timer).replace('.', ',') + ' timer' + (s.mand > 1 ? ' · ' + s.mand + ' mand' : '') + '</div>';
+    h += '<div class="status"><i class="prik ' + statusKlasse(s.status) + '"></i>' + esc(s.status) + '</div>';
+    h += '<div class="boks"><h4>På opgaven</h4>' + esc(s.ansvarlige.join(', ') || 'Ikke fordelt endnu') + '</div>';
+    if (s.kontakt) h += '<div class="boks note"><h4>Kontakt hos kunden</h4>' + linkify(s.kontakt) + '</div>';
+    h += '<div class="knapper"><a class="k primaer" href="' + maps(s.kunde) + '" target="_blank">' + ik('rute') + 'Vis rute</a>';
+    t2.forEach(function (n) { h += ringKnap(n); });
     h += '<button class="k" onclick="lukArk()">Luk</button></div>';
     if (S.rolle === 'admin') h += '<div class="lille" style="margin-top:12px">Service-besøg rettes i den interne fil (Service oversigt).</div>';
   }
@@ -545,18 +552,18 @@ function nyOpgave(dato, navne) { FORM = {ny: true, dato: dato, til: dato, navne:
 function retOpgave(i) { var r = REF[i]; FORM = {ny: false, dato: r.dato, til: r.dato, navne: [r.o.navn], tekst: r.o.tekst, note: r.o.note}; visForm(); }
 function visForm() {
   var f = FORM, ch = '';
-  S.personer.forEach(function (p) { ch += '<button type="button" class="chip' + (f.navne.indexOf(p) >= 0 ? ' valgt' : '') + '" onclick="formPerson(\'' + jsq(p) + '\')">' + av(p) + esc(p) + '</button>'; });
-  aabnArk('<h2>' + (f.ny ? '＋ Ny opgave' : '✏️ Ret opgave') + '</h2><div class="under">Gemmes direkte i renseplanen – alle kan se det med det samme.</div>' +
+  S.personer.forEach(function (p) { ch += '<button type="button" class="chip' + (f.navne.indexOf(p) >= 0 ? ' valgt' : '') + '" onclick="formPerson(\'' + jsq(p) + '\')">' + esc(p) + '</button>'; });
+  aabnArk('<h2>' + (f.ny ? 'Ny opgave' : 'Ret opgave') + '</h2><div class="under">Gemmes direkte i renseplanen.</div>' +
     '<div class="felt"><label>Opgave / adresse</label><input id="f_tekst" value="' + esc(f.tekst) + '" placeholder="Fx Brandholms Allé 1A"></div>' +
-    '<div class="felt"><label>Note til medarbejderen (valgfri)</label><textarea id="f_note" placeholder="Fx: Ring til viceværten Ole på 22 33 44 55 når I ankommer. Nøgle i boks 4.">' + esc(f.note) + '</textarea></div>' +
+    '<div class="felt"><label>Note til medarbejderen (valgfri)</label><textarea id="f_note" placeholder="Fx: Ring til viceværten på 22 33 44 55 ved ankomst. Nøgle i boks 4.">' + esc(f.note) + '</textarea></div>' +
     '<div class="raekke2"><div class="felt"><label>Dato</label><input type="date" id="f_dato" value="' + f.dato + '"></div>' +
-    '<div class="felt"><label>Til og med (flere dage)</label><input type="date" id="f_til" value="' + f.til + '"></div></div>' +
-    '<div class="lille" style="margin-top:6px"><label><input type="checkbox" id="f_weekend"> Medtag lørdag/søndag</label></div>' +
-    '<div class="felt"><label>Medarbejdere (vælg en eller flere)</label><div class="vaelg">' + ch + '</div></div>' +
-    '<div class="knapper"><button class="k primaer" id="f_gem" onclick="formGem()">💾 Gem</button>' +
-    (f.ny ? '' : '<button class="k fare" onclick="formSlet(this)">🗑 Fjern opgaven</button>') +
+    '<div class="felt"><label>Til og med</label><input type="date" id="f_til" value="' + f.til + '"></div></div>' +
+    '<div class="lille" style="margin-top:8px"><label><input type="checkbox" id="f_weekend"> Medtag lørdag og søndag</label></div>' +
+    '<div class="felt"><label>Medarbejdere</label><div class="vaelg">' + ch + '</div></div>' +
+    '<div class="knapper"><button class="k primaer" id="f_gem" onclick="formGem()">Gem</button>' +
+    (f.ny ? '' : '<button class="k fare" onclick="formSlet(this)">' + ik('slet') + 'Fjern</button>') +
     '<button class="k" onclick="lukArk()">Annullér</button></div>' +
-    '<div class="lille" style="margin-top:10px">Tip: Står der allerede noget på dagen, bliver det erstattet. Alt gemmes også i opgave-arkivet.</div>');
+    '<div class="lille" style="margin-top:10px">Står der allerede noget på dagen, bliver det erstattet. Alt gemmes også i opgave-arkivet.</div>');
   setTimeout(function () { var x = document.getElementById('f_tekst'); if (x) x.focus(); }, 50);
 }
 function formLaes() { FORM.tekst = document.getElementById('f_tekst').value; FORM.note = document.getElementById('f_note').value; FORM.dato = document.getElementById('f_dato').value; FORM.til = document.getElementById('f_til').value || FORM.dato; FORM.weekend = document.getElementById('f_weekend').checked; }
@@ -569,31 +576,31 @@ function formGem(slet) {
   var b = document.getElementById('f_gem'); if (b) { b.disabled = true; b.textContent = 'Gemmer…'; }
   var data = {dato: FORM.dato, til: FORM.til, navne: FORM.navne, tekst: slet ? '' : FORM.tekst, note: slet ? '' : FORM.note, weekend: FORM.weekend};
   google.script.run.withSuccessHandler(function (r) {
-    if (r && r.fejl) { toast(r.fejl); if (b) { b.disabled = false; b.textContent = '💾 Gem'; } return; }
-    lukArk(); toast(slet ? 'Opgaven er fjernet' : '✓ Gemt (' + r.antal + (r.antal === 1 ? ' dag' : ' felter') + ')' + (r.mangler && r.mangler.length ? ' – nogle datoer findes ikke i renseplanen' : ''));
+    if (r && r.fejl) { toast(r.fejl); if (b) { b.disabled = false; b.textContent = 'Gem'; } return; }
+    lukArk(); toast(slet ? 'Opgaven er fjernet' : 'Gemt (' + r.antal + (r.antal === 1 ? ' dag' : ' felter') + ')' + (r.mangler && r.mangler.length ? ' – nogle datoer findes ikke i renseplanen' : ''));
     indlaes(false, true);
-  }).withFailureHandler(function (e) { toast('Kunne ikke gemme: ' + (e && e.message || 'fejl')); if (b) { b.disabled = false; b.textContent = '💾 Gem'; } }).planGem(S.pin, data);
+  }).withFailureHandler(function (e) { toast('Kunne ikke gemme: ' + (e && e.message || 'fejl')); if (b) { b.disabled = false; b.textContent = 'Gem'; } }).planGem(S.pin, data);
 }
-function formSlet(b) { if (b.getAttribute('data-ok')) return formGem(true); b.setAttribute('data-ok', '1'); b.textContent = '⚠️ Klik igen for at fjerne'; b.style.background = '#fdecec'; }
+function formSlet(b) { if (b.getAttribute('data-ok')) return formGem(true); b.setAttribute('data-ok', '1'); b.innerHTML = 'Klik igen for at fjerne'; }
 
 /* ---------- Kalender-abonnement ---------- */
 function visKalender() {
   var noegle = S.data.noegler[S.person], https = S.data.webapp + '?ical=' + noegle, webcal = https.replace(/^https:/, 'webcal:');
-  aabnArk('<h2>📅 ' + esc(S.person) + 's kalender på telefonen</h2><div class="under">Dine opgaver og service-besøg dukker automatisk op i telefonens kalender og opdateres løbende.</div>' +
-    '<div class="knapper"><a class="k primaer" href="' + webcal + '">🍏 iPhone – tilføj kalender</a>' +
-    '<a class="k primaer" href="https://calendar.google.com/calendar/r?cid=' + encodeURIComponent(webcal) + '" target="_blank">🤖 Android / Google</a>' +
-    '<a class="k" href="https://outlook.live.com/calendar/0/addfromweb?url=' + encodeURIComponent(https) + '&name=' + encodeURIComponent('Ventilux – ' + S.person) + '" target="_blank">📧 Outlook</a></div>' +
-    '<div class="boks"><h4>Eller kopiér linket</h4><input readonly value="' + esc(https) + '" onclick="this.select()" style="width:100%;border:1px solid var(--linje);border-radius:9px;padding:8px;font-size:12.5px"></div>' +
+  aabnArk('<h2>' + esc(S.person) + ' – kalender på telefonen</h2><div class="under">Dine opgaver og service-besøg vises automatisk i telefonens kalender og opdateres løbende.</div>' +
+    '<div class="knapper"><a class="k primaer" href="' + webcal + '">iPhone</a>' +
+    '<a class="k primaer" href="https://calendar.google.com/calendar/r?cid=' + encodeURIComponent(webcal) + '" target="_blank">Android / Google</a>' +
+    '<a class="k" href="https://outlook.live.com/calendar/0/addfromweb?url=' + encodeURIComponent(https) + '&name=' + encodeURIComponent('Ventilux – ' + S.person) + '" target="_blank">Outlook</a></div>' +
+    '<div class="felt"><label>Eller kopiér linket</label><input readonly value="' + esc(https) + '" onclick="this.select()" style="font-size:12.5px"></div>' +
     '<div class="lille" style="margin-top:10px">Linket er personligt – del det ikke med andre.</div>' +
     '<div class="knapper"><button class="k" onclick="lukArk()">Luk</button></div>');
 }
 
 function visMenu() {
-  aabnArk('<h2>Ventilux Plan</h2><div class="under">' + (S.rolle === 'admin' ? 'Logget ind som ledelse' : 'Logget ind som medarbejder') + '</div>' +
+  aabnArk('<h2>Ventilux Plan</h2><div class="under">' + (S.rolle === 'admin' ? 'Logget ind som ledelse' : S.data.mig ? 'Logget ind som ' + S.data.mig : 'Logget ind som medarbejder') + '</div>' +
     '<div class="knapper" style="flex-direction:column">' +
-    (S.rolle === 'admin' ? '<a class="k" href="' + S.data.renseplan + (S.data.dage[0].kolonne ? '&range=' + S.data.dage[0].kolonne + '1' : '') + '" target="_blank">📊 Åbn renseplanen (regneark)</a>' : '') +
-    '<button class="k" onclick="window.print()">🖨 Udskriv denne visning</button>' +
-    '<button class="k" onclick="logUd()">🔑 Skift PIN / log ud</button><button class="k" onclick="lukArk()">Luk</button></div>');
+    (S.rolle === 'admin' ? '<a class="k" href="' + S.data.renseplan + (S.data.dage[0].kolonne ? '&range=' + S.data.dage[0].kolonne + '1' : '') + '" target="_blank">' + ik('ark') + 'Åbn renseplanen (regneark)</a>' : '') +
+    '<button class="k" onclick="window.print()">' + ik('print') + 'Udskriv denne visning</button>' +
+    '<button class="k" onclick="logUd()">' + ik('ud') + 'Log ud</button><button class="k" onclick="lukArk()">Luk</button></div>');
 }
 
 /* ---------- Swipe + automatisk opdatering ---------- */
