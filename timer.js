@@ -59,6 +59,18 @@
     '.t-hjaelp{font-size:12.5px;color:var(--svag);margin:0 0 12px}' +
     '.t-tabel .otc{color:var(--service);font-weight:600}' +
     '@media (max-width:560px){.t-tid input[type=time]{width:120px;font-size:20px}.t-sum b{font-size:18px}.t-sum div{padding:8px 10px}}' +
+    '.t-norm{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;border:2px solid var(--linje2);border-radius:12px;background:var(--bg);cursor:pointer;font:inherit;color:inherit;text-align:left;-webkit-tap-highlight-color:transparent}' +
+    '.t-norm .bx{flex:none;width:30px;height:30px;border-radius:8px;border:2px solid var(--linje2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff}' +
+    '.t-norm b{display:block;font-size:16px;color:var(--tekst)}.t-norm span{font-size:13px;color:var(--svag)}' +
+    '.t-norm.paa{border-color:var(--gron);background:rgba(63,178,127,.10)}.t-norm.paa .bx{background:var(--gron);border-color:var(--gron)}' +
+    '.t-anden{margin-top:12px;padding:12px;border:1px dashed var(--linje2);border-radius:10px}' +
+    '.t-anden .lbl{font-size:13px;font-weight:600;margin-bottom:8px}' +
+    '.t-ot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}' +
+    '.t-ot .lbl{font-size:14px;font-weight:600}' +
+    '.t-step{display:flex;align-items:center;border:1px solid var(--linje2);border-radius:10px;overflow:hidden;background:var(--bg)}' +
+    '.t-step button{width:46px;height:48px;border:0;background:var(--flade);color:var(--tekst);font-size:22px;cursor:pointer}' +
+    '.t-step input{width:72px;height:48px;border:0;text-align:center;font-size:20px;font-weight:600;background:var(--bg);color:var(--tekst)}' +
+    '.t-dag .nm{font-size:10px;color:var(--gron);font-weight:600}' +
     '@media print{.slor{position:static;background:none}.ark{max-height:none;box-shadow:none;border:0}.knapper,.t-hoved button{display:none}}';
   var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
   IK.ur = '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>';
@@ -81,6 +93,8 @@
   function mini(k) { return k ? kort(k).replace(/:30$/, '½').replace(/:15$/, '¼').replace(/:45$/, '¾') : ''; }
   function tidTilMin(k) { var m = /^(\d{1,2}):(\d{2})/.exec(k || ''); return m ? +m[1] * 60 + +m[2] : null; }
   function tOgMin(t) { var h = Math.floor(t + 1e-9), m = Math.round((t - h) * 60); if (m === 60) { h++; m = 0; } return h + ' t' + (m ? ' ' + m + ' min' : ''); }
+  function normal(d) { var w = tilDato(d).getDay(); if (w === 0 || w === 6) return null; return w === 5 ? {start: '07:00', slut: '14:00', timer: 7} : {start: '07:00', slut: '14:30', timer: 7.5}; }
+  function erNormal(d, x) { var n = normal(d); return !!(n && x && x.start === n.start && x.slut === n.slut && x.timer === n.timer); }
   function bred() { var a = document.querySelector('.ark'); if (a) a.classList.add('bred'); }
   function venter(t) { aabnArk('<div class="spinner" style="margin:40px auto"></div><div class="lille" style="text-align:center">' + esc(t || 'Henter…') + '</div>'); }
 
@@ -107,7 +121,7 @@
       ((r.admin || r.fra < r.aktuel) ? '<button class="tk ikon" onclick="VXT.mine(\'' + naeste(r.fra) + '\',\'' + jsq(T.navn) + '\')" aria-label="Næste periode">' + ik('hoejre') + '</button>' : '<span style="width:34px"></span>') + '</div>';
     h += r.godkendt ? '<div class="t-status laast">' + ik('laas') + 'Godkendt af ' + esc(r.godkendt.af) + ' ' + esc(r.godkendt.tid) + (r.kanRette ? ' – ledelsen kan stadig rette' : ' – kan ikke længere rettes') + '</div>'
       : '<div class="t-status">Åben – du kan rette, indtil ledelsen har godkendt perioden</div>';
-    h += '<div class="t-sum tre"><div><b>' + tt(r.sum) + '</b><span>timer i alt</span></div><div class="ot"><b>' + tt(r.over || 0) + '</b><span>heraf overarbejde</span></div><div><b>' + r.antal + '</b><span>dage</span></div></div>';
+    h += '<div class="t-sum tre"><div><b>' + tt(r.sum) + '</b><span>timer normal tid</span></div><div class="ot"><b>' + tt(r.over || 0) + '</b><span>overarbejde</span></div><div><b>' + r.antal + '</b><span>dage</span></div></div>';
     h += '<div class="t-kal">';
     ['Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør', 'Søn'].forEach(function (u) { h += '<div class="uh">' + u + '</div>'; });
     var ds = datoer(r.fra, r.til), pad = (tilDato(r.fra).getDay() + 6) % 7, slutPer = r.aktuel ? plus(naeste(r.aktuel), -1) : r.til;
@@ -118,24 +132,27 @@
       h += '<button class="t-dag' + (wk ? ' wk' : '') + (x ? ' har' : '') + (d === r.idag ? ' idag' : '') + (d === T.valgt ? ' valgt' : '') + (frem ? ' frem' : '') + '"' +
         (spaerret ? ' disabled' : ' onclick="VXT.vaelg(\'' + d + '\')"') + '>' +
         '<span class="n"><span>' + dt.getDate() + (dt.getDate() === 1 || d === r.fra ? '. ' + MDR[dt.getMonth()].slice(0, 3) : '') + '</span>' + (x && x.over ? '<span class="otm">+' + tt(x.over) + '</span>' : '') + '</span>' +
-        '<span class="h">' + (x ? tt(x.timer) : '') + '</span>' + (x && x.start && x.slut ? '<span class="tl">' + mini(x.start) + '–' + mini(x.slut) + '</span>' : (x && x.note ? '<span class="nt">' + esc(x.note) + '</span>' : '')) + '</button>';
+        '<span class="h">' + (x ? tt(x.timer) : '') + '</span>' + (x && erNormal(d, x) ? '<span class="nm">✓ Normal</span>' : x && x.start && x.slut ? '<span class="tl">' + mini(x.start) + '–' + mini(x.slut) + '</span>' : (x && x.note ? '<span class="nt">' + esc(x.note) + '</span>' : '')) + '</button>';
     });
     h += '</div>';
     if (T.valgt && r.kanRette) {
-      var x = r.dage[T.valgt] || {}, sd = r.sidst;
-      h += '<div class="t-red"><h4>' + esc(stort(langDato(T.valgt))) + '</h4>' +
-        '<p class="t-hjaelp">Skriv hvornår du mødte og fik fri – så regner appen selv timerne ud.</p>' +
+      var x = r.dage[T.valgt] || {}, n = normal(T.valgt), ny = x.timer == null;
+      T.norm = !!n && (ny ? true : erNormal(T.valgt, x));
+      h += '<div class="t-red"><h4>' + esc(stort(langDato(T.valgt))) + '</h4>';
+      if (n) h += '<button type="button" class="t-norm' + (T.norm ? ' paa' : '') + '" id="t_norm" onclick="VXT.norm()"><span class="bx">' + (T.norm ? '✓' : '') + '</span>' +
+        '<span><b>Normal arbejdsdag</b><span>' + n.start + ' – ' + n.slut + ' · ' + tt(n.timer) + ' timer</span></span></button>';
+      h += '<div class="t-anden" id="t_anden"' + (T.norm ? ' style="display:none"' : '') + '><div class="lbl">' + (n ? 'Anden arbejdstid i dag' : 'Weekend – skriv dine timer') + '</div>' +
         '<div class="t-tid"><label class="t-felt">Mødt<input type="time" id="t_start" step="300" value="' + esc(x.start || '') + '"></label>' +
         '<span class="pil">→</span>' +
         '<label class="t-felt">Fri<input type="time" id="t_slut" step="300" value="' + esc(x.slut || '') + '"></label></div>' +
-        (sd && !x.timer && x.timer !== 0 ? '<div class="t-hurtig"><button class="chip" onclick="VXT.sidst()">↺ Samme tider som sidst (' + kort(sd.start) + '–' + kort(sd.slut) + ')</button></div>' : '') +
         '<div class="t-beregn" id="t_beregn"></div>' +
-        '<div class="rk"><label class="t-felt">Timer i alt<input class="timer" id="t_timer" inputmode="decimal" placeholder="0" value="' + (x.timer != null ? tt(x.timer) : '') + '"></label>' +
-        '<label class="t-felt">Heraf overarbejde<input class="timer ot" id="t_over" inputmode="decimal" placeholder="0" value="' + (x.over ? tt(x.over) : '') + '"></label></div>' +
-        '<div class="t-hurtig"><span class="lille" style="align-self:center">Overarbejde:</span>' + ['0', '0,5', '1', '1,5', '2', '3'].map(function (v) { return '<button class="chip ot" onclick="VXT.over(\'' + v + '\')">' + v + ' t</button>'; }).join('') + '</div>' +
-        '<input class="note" id="t_note" style="width:100%" maxlength="200" placeholder="Bemærkning (valgfri) – fx syg, ferie, hvorfor overarbejde" value="' + esc(x.note || '') + '">' +
+        '<label class="t-felt">Timer<input class="timer" id="t_timer" inputmode="decimal" placeholder="0" value="' + (x.timer != null ? tt(x.timer) : '') + '"></label>' +
+        '<div class="lille" style="margin-top:6px">Syg, ferie eller fri? Skriv 0 timer og en bemærkning.</div></div>';
+      h += '<div class="t-ot"><span class="lbl">Overarbejde</span><div class="t-step"><button type="button" onclick="VXT.step(-0.5)" aria-label="Mindre">−</button>' +
+        '<input id="t_over" inputmode="decimal" placeholder="0" value="' + (x.over ? tt(x.over) : '') + '"><button type="button" onclick="VXT.step(0.5)" aria-label="Mere">+</button></div><span class="lille">timer ekstra</span></div>' +
+        '<input class="note" id="t_note" style="width:100%;margin-top:12px" maxlength="200" placeholder="Bemærkning (valgfri) – fx hvorfor overarbejde" value="' + esc(x.note || '') + '">' +
         '<div class="knapper" style="margin-top:12px"><button class="k primaer" id="t_gem" onclick="VXT.gem()">Gem</button>' +
-        (x.timer != null ? '<button class="k fare" onclick="VXT.slet(this)">' + ik('slet') + 'Slet dagen</button>' : '') + '</div></div>';
+        (!ny ? '<button class="k fare" onclick="VXT.slet(this)">' + ik('slet') + 'Slet dagen</button>' : '') + '</div></div>';
     } else if (r.kanRette) {
       h += '<div class="lille" style="margin-top:12px">Tryk på en dag i kalenderen for at skrive timer – også dage du har glemt.</div>';
     }
@@ -155,18 +172,27 @@
     o.innerHTML = kort(a.value) + ' → ' + kort(b.value) + ' = <b>' + tOgMin(t) + '</b>';
     if (stille !== true) f.value = tt(t);
   }
-  function sidst() {
-    var sd = T.data.sidst; if (!sd) return;
-    document.getElementById('t_start').value = sd.start; document.getElementById('t_slut').value = sd.slut; beregn();
+  function norm() {
+    T.norm = !T.norm;
+    var b = document.getElementById('t_norm'), a = document.getElementById('t_anden');
+    b.classList.toggle('paa', T.norm); b.querySelector('.bx').textContent = T.norm ? '✓' : '';
+    a.style.display = T.norm ? 'none' : '';
+    if (!T.norm) { var f = document.getElementById('t_start'); if (f && PC) f.focus(); }
   }
-  function over(v) { var f = document.getElementById('t_over'); if (f) f.value = v === '0' ? '' : v; }
+  function step(d) {
+    var f = document.getElementById('t_over'); if (!f) return;
+    var v = Number(String(f.value || '0').replace(',', '.')) || 0; v = Math.max(0, Math.round((v + d) * 2) / 2);
+    f.value = v ? tt(v) : '';
+  }
   function vaelg(d) { T.valgt = d; visMine(); }
   function hurtig(v) { var f = document.getElementById('t_timer'); if (f) f.value = v; gem(); }
   function gem(slet) {
     var val = function (id) { return slet ? '' : ((document.getElementById(id) || {}).value || ''); };
     var timer = val('t_timer'), note = val('t_note'), start = val('t_start'), slut = val('t_slut'), ov = val('t_over');
-    if (!slet && !String(timer).trim() && !(start && slut)) return toast('Skriv hvornår du mødte og fik fri – eller antal timer');
-    if (!slet && (start && !slut || slut && !start)) return toast('Skriv både mødt og fri');
+    var n = normal(T.valgt);
+    if (!slet && n && T.norm) { start = n.start; slut = n.slut; timer = String(n.timer); }
+    if (!slet && !T.norm && !String(timer).trim() && !(start && slut)) return toast('Skriv hvornår du mødte og fik fri – eller antal timer');
+    if (!slet && !T.norm && (start && !slut || slut && !start)) return toast('Skriv både mødt og fri');
     var b = document.getElementById('t_gem'); if (b) { b.disabled = true; b.textContent = 'Gemmer…'; }
     kald('timerGem', [S.pin, {dato: T.valgt, timer: timer, note: note, navn: T.navn, start: start, slut: slut, over: ov}]).then(function (r) {
       if (r.fejl) { toast(r.fejl); if (b) { b.disabled = false; b.textContent = 'Gem'; } return; }
@@ -179,7 +205,7 @@
         if (r.start && r.slut && (!d.sidst || T.valgt >= d.sidst.dato)) d.sidst = {dato: T.valgt, start: r.start, slut: r.slut};
       }
       d.sum = Math.round(d.sum * 100) / 100; d.over = Math.round(d.over * 100) / 100;
-      toast(slet ? 'Dagen er slettet' : 'Gemt: ' + tt(r.timer) + ' timer' + (r.over ? ' (heraf ' + tt(r.over) + ' overarbejde)' : ''));
+      toast(slet ? 'Dagen er slettet' : 'Gemt: ' + tt(r.timer) + ' timer' + (r.over ? ' + ' + tt(r.over) + ' t overarbejde' : ''));
       var nxt = plus(T.valgt, 1);
       while (nxt <= d.til && nxt <= d.idag && (erWeekend(nxt) || d.dage[nxt])) nxt = plus(nxt, 1);
       T.valgt = (!slet && nxt <= d.til && nxt <= d.idag) ? nxt : T.valgt;
@@ -203,11 +229,11 @@
     h += '<div class="t-hoved"><button class="tk ikon" onclick="VXT.oversigt(\'' + forrige(r.fra) + '\')">' + ik('venstre') + '</button>' +
       '<div class="per">' + kortPer(r.fra, r.til) + '<small>Lønperiode' + (r.fra === r.aktuel ? ' · nuværende' : '') + '</small></div>' +
       '<button class="tk ikon" onclick="VXT.oversigt(\'' + naeste(r.fra) + '\')">' + ik('hoejre') + '</button></div>';
-    h += '<div class="t-sum tre"><div><b>' + tt(total) + '</b><span>timer i alt</span></div><div class="ot"><b>' + tt(ovt) + '</b><span>heraf overarbejde</span></div><div><b>' + godk + ' / ' + r.personer.length + '</b><span>godkendt</span></div></div>';
+    h += '<div class="t-sum tre"><div><b>' + tt(total) + '</b><span>timer normal tid</span></div><div class="ot"><b>' + tt(ovt) + '</b><span>overarbejde</span></div><div><b>' + godk + ' / ' + r.personer.length + '</b><span>godkendt</span></div></div>';
     if (!T.matrix) {
-      h += '<div class="t-tabel-wrap"><table class="t-tabel"><thead><tr><th>Medarbejder</th><th class="tal">Dage</th><th class="tal">Timer</th><th class="tal">Overarb.</th><th>Status</th><th></th></tr></thead><tbody>';
+      h += '<div class="t-tabel-wrap"><table class="t-tabel"><thead><tr><th>Medarbejder</th><th class="tal">Dage</th><th class="tal">Timer</th><th class="tal">Overarb.</th><th class="tal">I alt</th><th>Status</th><th></th></tr></thead><tbody>';
       r.personer.forEach(function (p) {
-        h += '<tr><td class="navn" onclick="VXT.mine(\'' + r.fra + '\',\'' + jsq(p.navn) + '\')">' + esc(p.navn) + '</td><td class="tal">' + p.antal + '</td><td class="tal"><b>' + tt(p.sum) + '</b></td><td class="tal' + (p.over ? ' otc' : '') + '">' + (p.over ? tt(p.over) : '–') + '</td>' +
+        h += '<tr><td class="navn" onclick="VXT.mine(\'' + r.fra + '\',\'' + jsq(p.navn) + '\')">' + esc(p.navn) + '</td><td class="tal">' + p.antal + '</td><td class="tal"><b>' + tt(p.sum) + '</b></td><td class="tal' + (p.over ? ' otc' : '') + '">' + (p.over ? tt(p.over) : '–') + '</td><td class="tal">' + tt(p.sum + (p.over || 0)) + '</td>' +
           '<td>' + (p.godkendt ? '<span class="ok">✓ Godkendt</span> <span class="lille">' + esc(p.godkendt.af) + ' ' + esc(p.godkendt.tid) + '</span>' : '<span class="aaben">Åben</span>') + '</td>' +
           '<td>' + (p.godkendt ? '<button class="t-knap-lille" onclick="VXT.godkend(this,\'' + jsq(p.navn) + '\',false)">Genåbn</button>'
             : '<button class="t-knap-lille gron" onclick="VXT.godkend(this,\'' + jsq(p.navn) + '\',true)">Godkend</button>') + '</td></tr>';
@@ -248,10 +274,10 @@
   function csv() {
     var r = T.ov, ds = datoer(r.fra, r.til), sep = ';', lin = [];
     var q = function (s) { s = String(s == null ? '' : s); return /[;"\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
-    lin.push(['Medarbejder', 'Timer i alt', 'Heraf overarbejde', 'Dage', 'Status'].concat(ds.map(function (d) { var x = tilDato(d); return x.getDate() + '/' + (x.getMonth() + 1); })).concat(['Bemærkninger']).join(sep));
+    lin.push(['Medarbejder', 'Timer (normal)', 'Overarbejde', 'I alt', 'Dage', 'Status'].concat(ds.map(function (d) { var x = tilDato(d); return x.getDate() + '/' + (x.getMonth() + 1); })).concat(['Bemærkninger']).join(sep));
     r.personer.forEach(function (p) {
       var noter = ds.filter(function (d) { return p.dage[d] && p.dage[d].note; }).map(function (d) { var x = tilDato(d); return x.getDate() + '/' + (x.getMonth() + 1) + ': ' + p.dage[d].note; }).join(' | ');
-      lin.push([q(p.navn), tt(p.sum), tt(p.over || 0), p.antal, p.godkendt ? 'Godkendt ' + p.godkendt.tid : 'Åben'].concat(ds.map(function (d) { return p.dage[d] ? tt(p.dage[d].timer) : ''; })).concat([q(noter)]).join(sep));
+      lin.push([q(p.navn), tt(p.sum), tt(p.over || 0), tt(p.sum + (p.over || 0)), p.antal, p.godkendt ? 'Godkendt ' + p.godkendt.tid : 'Åben'].concat(ds.map(function (d) { return p.dage[d] ? tt(p.dage[d].timer) : ''; })).concat([q(noter)]).join(sep));
     });
     hentFil(lin, 'Ventilux timer ' + r.fra + ' til ' + r.til + '.csv');
   }
@@ -263,19 +289,19 @@
   function csvDage() {
     var r = T.ov, ds = datoer(r.fra, r.til), sep = ';', lin = [];
     var q = function (s) { s = String(s == null ? '' : s); return /[;"\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
-    lin.push(['Medarbejder', 'Dato', 'Ugedag', 'Mødt', 'Fri', 'Timer', 'Heraf overarbejde', 'Bemærkning'].join(sep));
+    lin.push(['Medarbejder', 'Dato', 'Ugedag', 'Normal dag', 'Mødt', 'Fri', 'Timer', 'Overarbejde', 'I alt', 'Bemærkning'].join(sep));
     r.personer.forEach(function (p) {
       ds.forEach(function (d) {
         var x = p.dage[d]; if (!x) return; var dt = tilDato(d);
-        lin.push([q(p.navn), dt.getDate() + '-' + (dt.getMonth() + 1) + '-' + dt.getFullYear(), DAGE[dt.getDay()], x.start || '', x.slut || '', tt(x.timer), x.over ? tt(x.over) : '', q(x.note)].join(sep));
+        lin.push([q(p.navn), dt.getDate() + '-' + (dt.getMonth() + 1) + '-' + dt.getFullYear(), DAGE[dt.getDay()], erNormal(d, x) ? 'Ja' : 'Nej', x.start || '', x.slut || '', tt(x.timer), x.over ? tt(x.over) : '', tt(x.timer + (x.over || 0)), q(x.note)].join(sep));
       });
-      if (p.antal) lin.push([q(p.navn + ' – i alt'), '', '', '', '', tt(p.sum), tt(p.over || 0), ''].join(sep));
+      if (p.antal) lin.push([q(p.navn + ' – i alt'), '', '', '', '', '', tt(p.sum), tt(p.over || 0), tt(p.sum + (p.over || 0)), ''].join(sep));
     });
     hentFil(lin, 'Ventilux timer dag for dag ' + r.fra + ' til ' + r.til + '.csv');
   }
 
   window.VXT = {
-    mine: mine, vaelg: vaelg, hurtig: hurtig, gem: function () { gem(false); }, slet: slet, sidst: sidst, over: over,
+    mine: mine, vaelg: vaelg, hurtig: hurtig, gem: function () { gem(false); }, slet: slet, norm: norm, step: step,
     oversigt: oversigt, godkend: godkend, csv: csv, csvDage: csvDage,
     skiftVisning: function () { T.matrix = !T.matrix; visOversigt(); },
     aabn: function () { if (S.rolle === 'admin') oversigt(); else mine(); }
