@@ -286,7 +286,7 @@
     if (opt.oversigt) {
       var S1 = 0, S2 = 0, g = 0;
       personer.forEach(function (p) { S1 += p.sum; S2 += (p.over || 0); if (p.godkendt) g++; });
-      var h = hoved('Samlet lønoversigt', '<div class="sm">' + (opt.alle ? 'Alle medarbejdere' : personer.length + ' udvalgte medarbejder' + (personer.length === 1 ? '' : 'e')) + '</div>') +
+      var h = hoved('Samlet lønoversigt', '<div class="sm">' + (opt.alle ? 'Alle medarbejdere' : personer.length + (personer.length === 1 ? ' udvalgt medarbejder' : ' udvalgte medarbejdere')) + '</div>') +
         kort([['Normale timer', t2(S1), ''], ['Overarbejde', '+' + t2(S2), 'gron'], ['Godkendt', g + ' af ' + personer.length, 'lilla'], ['Timer i alt', t2(S1 + S2), 'bla']]) +
         '<h2>Oversigt pr. medarbejder</h2><table><thead><tr><th>Medarbejder</th><th class="n">Dage</th><th class="n">Normale timer</th><th class="n">Overarbejde</th><th class="n">I alt</th><th class="n">Syg / fri</th><th>Status</th></tr></thead><tbody>';
       personer.forEach(function (p) {
