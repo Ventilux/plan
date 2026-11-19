@@ -43,6 +43,10 @@
     '.t-matrix td.wk,.t-matrix th.wk{background:var(--flade2)}' +
     '.t-matrix td:first-child,.t-matrix th:first-child{position:sticky;left:0;background:var(--flade);z-index:2}' +
     '.t-knap-lille{height:30px;border:1px solid var(--linje2);border-radius:7px;background:var(--flade);color:var(--tekst);padding:0 10px;font:inherit;font-size:12.5px;cursor:pointer}' +
+    '.t-rv-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}' +
+    '.t-rv-liste{border:1px solid var(--linje);border-radius:10px;overflow:hidden}' +
+    '.t-rv{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--linje);cursor:pointer}.t-rv:last-child{border-bottom:0}' +
+    '.t-rv input{width:20px;height:20px;accent-color:var(--brand,#3b82f6);flex:none}.t-rv .nv{flex:1;font-weight:500}' +
     '.t-knap-lille.gron{background:var(--gron);border-color:var(--gron);color:#fff}' +
     '.t-sum.tre{grid-template-columns:1fr 1fr 1fr}.t-sum .ot b{color:var(--service)}' +
     '.t-dag .n{display:flex;justify-content:space-between;gap:2px}' +
@@ -265,7 +269,8 @@
   }
   /* ---------- Udskriv: periode-rapport (samlet + én side pr. medarbejder) ---------- */
   function dmy(d) { var t = tilDato(d); return ('0' + t.getDate()).slice(-2) + '/' + ('0' + (t.getMonth() + 1)).slice(-2) + '/' + t.getFullYear(); }
-  function rapportHtml(personer, fra, til, enkelt) {
+  function rapportHtml(personer, fra, til, opt) {
+    opt = opt || {oversigt: true, sider: true};
     var nu = new Date(), udskr = ('0' + nu.getDate()).slice(-2) + '/' + ('0' + (nu.getMonth() + 1)).slice(-2) + '/' + nu.getFullYear() + ' kl. ' + ('0' + nu.getHours()).slice(-2) + ':' + ('0' + nu.getMinutes()).slice(-2);
     var af = (T.ov && T.ov.mig) || (T.data && T.data.mig) || 'Ledelse';
     var ds = datoer(fra, til), per = dmy(fra) + ' – ' + dmy(til);
@@ -278,11 +283,10 @@
       return '<div class="kort">' + a.map(function (k) { return '<div class="k ' + k[2] + '"><span>' + k[0] + '</span><b>' + k[1] + '</b></div>'; }).join('') + '</div>';
     };
     var sider = [];
-    var aktive = personer.filter(function (p) { return p.antal; });
-    if (!enkelt) {
+    if (opt.oversigt) {
       var S1 = 0, S2 = 0, g = 0;
       personer.forEach(function (p) { S1 += p.sum; S2 += (p.over || 0); if (p.godkendt) g++; });
-      var h = hoved('Samlet lønoversigt', '<div class="sm">Alle medarbejdere</div>') +
+      var h = hoved('Samlet lønoversigt', '<div class="sm">' + (opt.alle ? 'Alle medarbejdere' : personer.length + ' udvalgte medarbejder' + (personer.length === 1 ? '' : 'e')) + '</div>') +
         kort([['Normale timer', t2(S1), ''], ['Overarbejde', '+' + t2(S2), 'gron'], ['Godkendt', g + ' af ' + personer.length, 'lilla'], ['Timer i alt', t2(S1 + S2), 'bla']]) +
         '<h2>Oversigt pr. medarbejder</h2><table><thead><tr><th>Medarbejder</th><th class="n">Dage</th><th class="n">Normale timer</th><th class="n">Overarbejde</th><th class="n">I alt</th><th class="n">Syg / fri</th><th>Status</th></tr></thead><tbody>';
       personer.forEach(function (p) {
@@ -291,10 +295,10 @@
           (p.godkendt ? '<span class="ok">✓ Godkendt</span><div class="sm">' + esc(p.godkendt.af) + ' · ' + esc(p.godkendt.tid) + '</div>' : (p.antal ? '<span class="aab">Åben</span>' : '<span class="sm">Ingen timer</span>')) + '</td></tr>';
       });
       h += '</tbody><tfoot><tr><td>I alt</td><td></td><td class="n">' + tt(S1) + '</td><td class="n ot">+' + tt(S2) + '</td><td class="n">' + tt(S1 + S2) + '</td><td></td><td></td></tr></tfoot></table>' +
-        '<p class="sm" style="margin-top:10px">De følgende sider viser den daglige opgørelse for hver medarbejder med registrerede timer.</p>';
+        (opt.sider ? '<p class="sm" style="margin-top:10px">De følgende sider viser den daglige opgørelse for hver medarbejder.</p>' : '');
       sider.push(h);
     }
-    (enkelt ? personer : aktive).forEach(function (p) {
+    (opt.sider ? personer : []).forEach(function (p) {
       var fri = 0, h = hoved('Samlet perioderapport', '<div class="sm">Medarbejder: <b>' + esc(p.navn) + '</b></div>');
       h += kort([['Normale timer', t2(p.sum), ''], ['Overarbejde', '+' + t2(p.over), 'gron'], ['Dage registreret', String(p.antal), 'lilla'], ['Timer i alt', t2(p.sum + (p.over || 0)), 'bla']]);
       h += '<h2>Daglig opgørelse</h2><table class="dag"><thead><tr><th>Dato</th><th>Ugedag</th><th>Arbejdstid</th><th class="n">Normal tid</th><th class="n">Overarbejde</th><th class="n">I alt</th><th>Bemærkning</th></tr></thead><tbody>';
@@ -340,15 +344,41 @@
       sider.map(function (s) { return '<section class="side">' + s + '<div class="fod">Udskrevet ' + udskr + ' af ' + esc(af) + ' · Ventilux Plan</div></section>'; }).join('') +
       '<script>window.onload=function(){setTimeout(function(){window.print()},400)}<\/script></body></html>';
   }
-  function rapport(navn) {
-    var personer, fra, til, enkelt = false;
-    if (navn && T.data) { personer = [{navn: T.data.person, dage: T.data.dage, sum: T.data.sum, over: T.data.over || 0, antal: T.data.antal, godkendt: T.data.godkendt}]; fra = T.data.fra; til = T.data.til; enkelt = true; }
-    else { personer = T.ov.personer; fra = T.ov.fra; til = T.ov.til; }
-    var html = rapportHtml(personer, fra, til, enkelt);
+  function aabnRapport(html) {
     var w = window.open('', '_blank');
     if (w) { w.document.open(); w.document.write(html); w.document.close(); return; }
     var blob = new Blob([html], {type: 'text/html'}), a = document.createElement('a');
     a.href = URL.createObjectURL(blob); a.target = '_blank'; document.body.appendChild(a); a.click(); setTimeout(function () { a.remove(); }, 1000);
+  }
+  function rapport(navn) {
+    if (navn && T.data) {
+      var p = {navn: T.data.person, dage: T.data.dage, sum: T.data.sum, over: T.data.over || 0, antal: T.data.antal, godkendt: T.data.godkendt};
+      return aabnRapport(rapportHtml([p], T.data.fra, T.data.til, {oversigt: false, sider: true}));
+    }
+    var r = T.ov, h = '';
+    h += '<div class="over">' + ik('print') + 'Udskriv lønrapport</div>';
+    h += '<div class="t-hoved"><div class="per">' + kortPer(r.fra, r.til) + '<small>Lønperiode</small></div></div>';
+    h += '<div class="t-rv-top"><b>Hvem skal med?</b><span><button class="t-knap-lille" onclick="VXT.rvAlle(1)">Vælg alle</button> <button class="t-knap-lille" onclick="VXT.rvAlle(2)">Kun med timer</button> <button class="t-knap-lille" onclick="VXT.rvAlle(0)">Ingen</button></span></div>';
+    h += '<div class="t-rv-liste">';
+    r.personer.forEach(function (p, i) {
+      h += '<label class="t-rv"><input type="checkbox" class="rv-p" data-i="' + i + '"' + (p.antal ? ' checked' : '') + ' onchange="VXT.rvTael()"><span class="nv">' + esc(p.navn) + '</span>' +
+        '<span class="lille">' + (p.antal ? tt(p.sum + (p.over || 0)) + ' t · ' + p.antal + ' dage' + (p.godkendt ? ' · ✓ godkendt' : '') : 'ingen timer') + '</span></label>';
+    });
+    h += '</div>';
+    h += '<div class="t-rv-top" style="margin-top:14px"><b>Hvad skal udskrives?</b></div><div class="t-rv-liste">' +
+      '<label class="t-rv"><input type="radio" name="rv-type" value="begge" checked><span class="nv">Samlet oversigt + én side pr. medarbejder</span></label>' +
+      '<label class="t-rv"><input type="radio" name="rv-type" value="oversigt"><span class="nv">Kun samlet oversigt (1 side)</span></label>' +
+      '<label class="t-rv"><input type="radio" name="rv-type" value="sider"><span class="nv">Kun siderne pr. medarbejder</span></label></div>';
+    h += '<div class="knapper"><button class="k primaer" id="rv_knap" onclick="VXT.rvUdskriv()">' + ik('print') + 'Udskriv</button><button class="k" onclick="VXT.oversigt(\'' + r.fra + '\')">Tilbage</button></div>';
+    aabnArk(h); bred(); rvTael();
+  }
+  function rvValgte() { return [].slice.call(document.querySelectorAll('.rv-p')).filter(function (c) { return c.checked; }).map(function (c) { return T.ov.personer[+c.getAttribute('data-i')]; }); }
+  function rvTael() { var n = rvValgte().length, b = document.getElementById('rv_knap'); if (b) { b.disabled = !n; b.lastChild.textContent = n ? 'Udskriv (' + n + ' medarbejder' + (n === 1 ? '' : 'e') + ')' : 'Vælg mindst én'; } }
+  function rvAlle(m) { [].slice.call(document.querySelectorAll('.rv-p')).forEach(function (c) { var p = T.ov.personer[+c.getAttribute('data-i')]; c.checked = m === 1 || (m === 2 && !!p.antal); }); rvTael(); }
+  function rvUdskriv() {
+    var valgte = rvValgte(); if (!valgte.length) return toast('Vælg mindst én medarbejder');
+    var t = (document.querySelector('input[name=rv-type]:checked') || {}).value || 'begge';
+    aabnRapport(rapportHtml(valgte, T.ov.fra, T.ov.til, {oversigt: t !== 'sider', sider: t !== 'oversigt', alle: valgte.length === T.ov.personer.length}));
   }
   function godkend(b, navn, ja) {
     if (!b.getAttribute('data-ok')) { b.setAttribute('data-ok', '1'); b.textContent = ja ? 'Klik igen – godkend' : 'Klik igen – genåbn'; return; }
@@ -389,7 +419,7 @@
 
   window.VXT = {
     mine: mine, vaelg: vaelg, hurtig: hurtig, gem: function () { gem(false); }, slet: slet, norm: norm, step: step,
-    oversigt: oversigt, godkend: godkend, csv: csv, csvDage: csvDage, rapport: rapport,
+    oversigt: oversigt, godkend: godkend, csv: csv, csvDage: csvDage, rapport: rapport, rvAlle: rvAlle, rvTael: rvTael, rvUdskriv: rvUdskriv,
     skiftVisning: function () { T.matrix = !T.matrix; visOversigt(); },
     aabn: function () { if (S.rolle === 'admin') oversigt(); else mine(); }
   };
