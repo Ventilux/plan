@@ -253,6 +253,8 @@ var API = 'https://script.google.com/macros/s/AKfycbxxlIps5EA_Od25hsEyS2sXHtv3zT
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
 </script>
 <script>
+// Vises ikke i appen (data i Google-arket bevares)
+var SKJULT = ['Kølemontør', 'Indregulering', 'Fohlmann El'];
 var S = {pin: '', rolle: '', person: '', visning: '', dato: idagTekst(), data: null, personer: [], weekend: false, tema: ''};
 var PC = window.matchMedia('(min-width:900px)').matches;
 function gem(k, v) { try { localStorage.setItem('vxplan_' + k, v); } catch (e) {} }
@@ -340,7 +342,7 @@ function indlaes(fraPin, stille) {
     document.body.classList.remove('indl');
     if (res && res.fejl === 'pin') { gem('pin', ''); return visPin(fraPin ? 'Forkert PIN-kode – prøv igen' : ''); }
     gem('pin', S.pin);
-    S.data = res; S.personer = res.personer; S.rolle = res.rolle;
+    S.data = res; S.personer = (res.personer || []).filter(function (p) { return SKJULT.indexOf(p) < 0; }); S.rolle = res.rolle;
     if (res.mig) S.person = res.mig;
     else if (S.person && S.personer.indexOf(S.person) < 0) S.person = '';
     tegn();

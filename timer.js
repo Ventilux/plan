@@ -223,6 +223,7 @@
     venter('Henter alle medarbejderes timer…');
     kald('timerOversigt', [S.pin, fra || '']).then(function (r) {
       if (r.fejl) return aabnArk('<h2>Timeoverblik</h2><div class="under">' + esc(r.fejl) + '</div><div class="knapper"><button class="k" onclick="lukArk()">Luk</button></div>');
+      if (window.SKJULT) r.personer = r.personer.filter(function (p) { return p.antal || SKJULT.indexOf(p.navn) < 0; });
       T.ov = r; visOversigt();
     }).catch(function (e) { toast('Kunne ikke hente – ' + e.message); lukArk(); });
   }
